@@ -1,0 +1,101 @@
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body{
+    font-size: 20px;
+    width: 100vw;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.login-box{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.438);
+}
+
+.login-form{
+    width: 350px;
+    background-image: linear-gradient(180deg, rgba(77, 77, 241, 0.829), rgba(255, 255, 255, 0.24) );
+    margin: 10px auto;
+    border-radius: 20px;
+    height: 550px;
+    position: relative;
+    border-bottom: 3px solid blue;
+}
+
+.login-logo{
+    width: 100px;
+    border-radius: 50%;
+    margin: 30px 125px;
+}
+
+.login-logo-label{
+    margin-left: 30px;
+    font-size: 110%;
+    font-weight: 700;
+}
+
+.form-input{
+    margin-top: 60px;
+    margin-left: 40px;
+}
+
+.input-icon{
+    position: absolute;
+    left: 28px;
+    margin-top: 5px;
+    font-size: 32px;
+    color: rgb(65, 63, 61);
+}
+
+.username,.password{
+    display: block;
+    margin: 40px auto ;
+    height: 40px;
+    width: 250px;
+    border-radius: 7px;
+    padding-left: 10px;
+    font-size: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgba(3, 3, 82, 0.329);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.37);
+}
+
+.username:hover ,
+.password:hover,
+.username:focus ,
+.password:focus{
+    background-color: rgba(3, 3, 82, 0.932);
+    border: 1px solid white;
+}
+
+.submit-btn{
+    display: block;
+    margin: 20px auto;
+    padding: 10px 45px;
+    border-radius: 5px;
+    background-color: rgba(37, 40, 223, 0.795);
+    color: white;
+    font-size: 100%;
+    font-weight: 600;
+    border: none;
+}
+
+.submit-btn:hover, 
+.submit-btn:active{
+    background-color: rgba(14, 17, 233, 0.89);
+    cursor: pointer;
+    border: 2px solid black;
+}
+
+.false-warming{
+    color: red;
+    margin-left: 80px;
+}
