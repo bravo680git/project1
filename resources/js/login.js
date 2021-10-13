@@ -1,6 +1,18 @@
+let loginAPI=''
+let wrongInfo=''
+let root =document.querySelector('#main')
+let Form
+let logInState=false
 
 function loadLoginForm() {
-    document.querySelector('#main').innerHTML=loginForm()
+    Form= document.createElement('div')
+    Form.innerHTML=loginForm()
+    root.appendChild(Form)
+    return Promise.resolve()
+}
+
+function logIn() {
+    alert("oks")
 }
 
 // Create Login Form
@@ -16,12 +28,11 @@ function loginForm() {
                     <input id="username" class="username" type="text" placeholder="Username">
                     <i class="fas fa-unlock input-icon"></i>
                     <input id="password" class="password" type="password" placeholder="Password">
-                    </div>
-                    <input onclick="login()" class="submit-btn" type="button" value="Log in">
+                </div>
+                    <div class="false-warming" id="error"></div>
+                    <input onclick="logIn()" class="submit-btn" type="button" value="Log in">
             </form>
-            <p class="false-warming" id="error"></p>
         </div>    
     </div>
             `
 }
-loadLoginForm()

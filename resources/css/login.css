@@ -20,23 +20,25 @@ body{
 }
 
 .login-form{
-    width: 350px;
-    background-image: linear-gradient(180deg, rgba(77, 77, 241, 0.829), rgba(255, 255, 255, 0.24) );
+    width: 500px;
+    background-color: white;
     margin: 10px auto;
-    border-radius: 20px;
+    border-radius: 10px;
     height: 550px;
     position: relative;
-    border-bottom: 3px solid blue;
+    border: 1px solid blue;
 }
 
 .login-logo{
     width: 100px;
+    display: block;
     border-radius: 50%;
-    margin: 30px 125px;
+    margin: 30px auto;
+    border: 1px solid blue;
 }
 
 .login-logo-label{
-    margin-left: 30px;
+    margin-left: 120px;
     font-size: 110%;
     font-weight: 700;
 }
@@ -58,9 +60,10 @@ body{
     display: block;
     margin: 40px auto ;
     height: 40px;
-    width: 250px;
+    width: 400px;
     border-radius: 7px;
-    padding-left: 10px;
+    padding-left: 20px;
+    letter-spacing: 2px;
     font-size: 100%;
     font-family: Arial, Helvetica, sans-serif;
     background-color: rgba(3, 3, 82, 0.329);
@@ -77,9 +80,10 @@ body{
 }
 
 .submit-btn{
-    display: block;
-    margin: 20px auto;
-    padding: 10px 45px;
+    position: absolute;
+    bottom: 60px;
+    left: 30px;
+    padding: 10px 190px;
     border-radius: 5px;
     background-color: rgba(37, 40, 223, 0.795);
     color: white;
@@ -96,6 +100,7 @@ body{
 }
 
 .false-warming{
+    margin-top: -20px;
     color: red;
-    margin-left: 80px;
+    text-align: center;
 }
