@@ -1,18 +1,29 @@
 let loginAPI=''
-let wrongInfo=''
 let root =document.querySelector('#main')
 let Form
-let logInState=false
+export let logInState=false
 
-function loadLoginForm() {
+export function logIn() {
+    fetch(loginAPI)
+        .then(response => response.json)
+        .then(data =>{
+            sessionStorage.setItem("loginToken",data[0])
+            root.removeChild(Form)
+            logInState=true
+        })
+        .catch(error => {
+            alert(error)
+            logInState=true
+            root.removeChild(Form)
+        })
+    return Promise.resolve
+}
+
+export function loadLoginForm() {
     Form= document.createElement('div')
     Form.innerHTML=loginForm()
     root.appendChild(Form)
     return Promise.resolve()
-}
-
-function logIn() {
-    alert("oks")
 }
 
 // Create Login Form
@@ -30,7 +41,7 @@ function loginForm() {
                     <input id="password" class="password" type="password" placeholder="Password">
                 </div>
                     <div class="false-warming" id="error"></div>
-                    <input onclick="logIn()" class="submit-btn" type="button" value="Log in">
+                    <input class="submit-btn" type="button" value="Log in">
             </form>
         </div>    
     </div>
