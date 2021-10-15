@@ -2,25 +2,36 @@ import {loadLoginForm,logIn,logInState} from './login.js'
 import {loadingApp} from './app.js'
 
 let mystate=false
+
 function start() {
-    loadingApp()
-    handleClickBtn('#login-btn',()=>{
-        loadLoginForm()
-        handleClickBtn('.submit-btn',()=>{
-            logIn()
-        })
+    return new Promise(resolve => {
+        loadingApp()
+        resolve()
     })
 }
-
 start()
-document.onclick=()=>{
-    if (logInState && !mystate) {
-        console.log("OK")
-        mystate=true
-        let btn=document.getElementById('login-btn')
-        btn.remove()
-    }
-}
+    .then(()=>{
+        return new Promise(resolve =>{
+            handleClickBtn('#login-btn',()=>{
+                loadLoginForm()
+                resolve()
+                })
+        })
+    })
+    .then(()=>{
+        return new Promise(resolve =>{
+            handleClickBtn('.submit-btn',()=>{
+                logIn()
+                resolve()
+            })
+        })
+    })
+    .then(()=>{
+        return new Promise(resolve=>{
+            document.getElementById('login-btn').remove()
+            resolve()
+        })
+    })
 //Define function
 
 function handleClickBtn(btnInfo,event) {

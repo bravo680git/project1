@@ -16,14 +16,12 @@ export function logIn() {
             logInState=true
             root.removeChild(Form)
         })
-    return Promise.resolve
 }
 
 export function loadLoginForm() {
     Form= document.createElement('div')
     Form.innerHTML=loginForm()
     root.appendChild(Form)
-    return Promise.resolve()
 }
 
 // Create Login Form
