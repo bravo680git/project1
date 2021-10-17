@@ -4,11 +4,79 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="./resources/css/home.css">
+    <title>Document</title>
     <script src="https://kit.fontawesome.com/2ffe9a64eb.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./build/app.css">
 </head>
 <body>
-    
+    <div>
+       <div class="header">
+        <header>
+            <div>
+                <img class="logo" src="./resources/images/logo_sistech.png" alt="logo">
+            </div>
+            <div class="title">
+                Chương trình giám sát trạm bơm
+            </div>
+            <div class="register">
+                <div class="icon">
+                    <i class="far fa-user-circle"></i>
+                </div>
+                Đăng nhập
+                
+            </div>
+        </header>
+       </div>
+
+       <div class="navigation">
+            <ul>
+                <li class="selected">Tram bom 1</li>
+                <li>Tram bom 2</li>
+                <li>Tram bom 3</li>
+            </ul>
+            <i class="close fas fa-chevron-circle-left"></i>
+            <i class="open fas fa-chevron-circle-right"></i>
+       </div>
+        
+       <div class="content">
+            <div id="location">Vị trí: 
+            </div>
+            <div id="time">
+                Thời gian:
+            </div>
+            <div id="length">
+                Mực nước: 
+            </div>
+            <div id="pressure">
+                Áp suất: 
+            </div>
+            <div id="clo-concentration">
+                Nồng độ Clo: 
+            </div>
+            <div id="clo-pour-history">
+                Lịch sử châm Clo:
+                <table>
+                    <tr id="title">
+                        <th>Thời gian</th>
+                        <th>Nhân viên</th>
+                        <th>Lượng Clo</th>
+                    </tr>
+                    <tr id="content">
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                    </tr>
+                    <tr id="content">
+                        <th>1</th>
+                        <th>2</th>
+                        <th>3</th>
+                    </tr>
+                </table>
+                <div id="add-history">
+                    <button title="Thêm nhật ký châm Clo"><i class="fas fa-plus"></i></button>
+                </div>
+            </div>
+       </div>
+    </div>
 </body>
 </html>

@@ -1,19 +1,13 @@
 import {loadLoginForm,logIn,logInState} from './login.js'
 import {loadingApp} from './app.js'
+import {vi,en} from './lang.js'
 
-let mystate=false
 
-function start() {
-    return new Promise(resolve => {
-        loadingApp()
-        resolve()
-    })
-}
-start()
+start(en)
     .then(()=>{
         return new Promise(resolve =>{
             handleClickBtn('#login-btn',()=>{
-                loadLoginForm()
+                loadLoginForm(en)
                 resolve()
                 })
         })
@@ -32,7 +26,16 @@ start()
             resolve()
         })
     })
+
+    
 //Define function
+
+function start(lang) {
+    return new Promise(resolve => {
+        loadingApp(lang)
+        resolve(lang)
+    })
+}
 
 function handleClickBtn(btnInfo,event) {
     let myBtn= document.querySelector(btnInfo)

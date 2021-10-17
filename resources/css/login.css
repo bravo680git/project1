@@ -17,6 +17,7 @@ body{
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.438);
+    z-index: 999;
 }
 
 .login-form{
@@ -38,8 +39,8 @@ body{
 }
 
 .login-logo-label{
-    margin-left: 120px;
-    font-size: 110%;
+    text-align: center;
+    font-size: 150%;
     font-weight: 700;
 }
 
@@ -83,7 +84,8 @@ body{
     position: absolute;
     bottom: 60px;
     left: 30px;
-    padding: 10px 190px;
+    width: 440px;
+    padding: 10px 0;
     border-radius: 5px;
     background-color: rgba(37, 40, 223, 0.795);
     color: white;
@@ -103,4 +105,25 @@ body{
     margin-top: -20px;
     color: red;
     text-align: center;
+}
+
+@media screen and (max-width: 480px) {
+    .login-form {
+        width: 94vw;
+    }
+
+    .login-logo-label {
+        margin: 0;
+        text-align: center;
+     }
+
+    .username,.password {
+        width: 80%;
+    }
+
+    .submit-btn {
+        padding: 10px 0;
+        width: 60%;
+        margin-left: 10%;
+    }
 }

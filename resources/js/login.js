@@ -18,28 +18,28 @@ export function logIn() {
         })
 }
 
-export function loadLoginForm() {
+export function loadLoginForm(lang) {
     Form= document.createElement('div')
-    Form.innerHTML=loginForm()
+    Form.innerHTML=loginForm(lang)
     root.appendChild(Form)
 }
 
 // Create Login Form
-function loginForm() {
+function loginForm(lang) {
     return `
     <div class="login-box">
         <div class="login-form">
             <form >
                 <img class="login-logo" src="../resources/images/logo_sistech.png" alt="Sistech logo">
-                <label for="login-logo" class="login-logo-label">Sistrain administraitor log in</label>
+                <div class="login-logo-label">${lang.logIn}</div>
                 <div class="form-input">
                     <i class="fas fa-user-alt input-icon"></i>
-                    <input id="username" class="username" type="text" placeholder="Username">
+                    <input id="username" class="username" type="text" placeholder='${lang.username}'>
                     <i class="fas fa-unlock input-icon"></i>
-                    <input id="password" class="password" type="password" placeholder="Password">
+                    <input id="password" class="password" type="password" placeholder='${lang.password}'>
                 </div>
                     <div class="false-warming" id="error"></div>
-                    <input class="submit-btn" type="button" value="Log in">
+                    <button class="submit-btn" type="button">${lang.logIn}</button>
             </form>
         </div>    
     </div>
