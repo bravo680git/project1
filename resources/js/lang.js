@@ -13,12 +13,16 @@ export const vi={
     cloConcen:"Nồng độ Clo: ",
     cloHist:"Lịch sử châm Clo: ",
     tableTime:"Thời gian",
-    tableEmpl:"Nhân viên",
-    tableCloAmount:"Lượng Clo"
+    tableEmp:"Nhân viên",
+    tableCloAmount:"Lượng Clo",
+    addFormTitle:"Thêm lịch sử châm Clo",
+    getDate:"Get Date",
+    cloAmount:"Lượng Clo",
+    save:"Lưu lại"
 }
 
 export const en={
-    mainTitle:"Program",
+    mainTitle:"Pump station monitoring program",
     logIn:"Log In",
     logOut:"Log Out",
     username:"Username",
@@ -30,6 +34,10 @@ export const en={
     cloConcen:"Chlorine concentration: ",
     cloHist:"Clo pouring history list: ",
     tableTime:"Date",
-    tableEmpl:"Staff",
-    tableCloAmount:"Amount of Chlorine"
+    tableEmp:"Staff",
+    tableCloAmount:"Amount of Chlorine",
+    addFormTitle:"Adding Clo pour history",
+    getDate:"Get Date",
+    cloAmount:"Amount",
+    save:"Save"
 }

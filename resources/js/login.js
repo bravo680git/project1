@@ -1,21 +1,26 @@
 let loginAPI=''
 let root =document.querySelector('#main')
 let Form
-export let logInState=false
 
 export function logIn() {
     fetch(loginAPI)
         .then(response => response.json)
         .then(data =>{
             sessionStorage.setItem("loginToken",data[0])
+            sessionStorage.setItem("isLogin",true)
+
             root.removeChild(Form)
-            logInState=true
         })
         .catch(error => {
             alert(error)
-            logInState=true
-            root.removeChild(Form)
+
+            // root.removeChild(Form)
         })
+}
+
+export function logOut() {
+    sessionStorage.removeItem("loginToken")
+    sessionStorage.setItem("isLogin",false)
 }
 
 export function loadLoginForm(lang) {

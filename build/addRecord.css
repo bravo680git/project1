@@ -1,0 +1,118 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.add-history-form {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.685);
+  z-index: 999;
+}
+
+.add-history-form form {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  width: 90%;
+  height: 250px;
+  border-radius: 20px;
+  border: 1px solid rgba(28, 28, 248, 0.822);
+}
+
+.add-history-form form .title {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.add-history-form form .date, .add-history-form form .staff, .add-history-form form .amount {
+  margin: 15px 10px;
+  display: flex;
+  margin-right: 40px;
+}
+
+.add-history-form form .date input, .add-history-form form .staff input, .add-history-form form .amount input {
+  flex: 1;
+  height: 30px;
+  border: 1px solid black;
+  border-radius: 2px;
+  font-size: 100%;
+  padding-left: 5px;
+}
+
+.add-history-form form .date label, .add-history-form form .staff label, .add-history-form form .amount label {
+  min-width: 80px;
+}
+
+.add-history-form form .date label::before, .add-history-form form .staff label::before, .add-history-form form .amount label::before {
+  content: "";
+  border-left: 3px solid rgba(28, 28, 248, 0.822);
+  margin-right: 8px;
+  line-height: 10px;
+}
+
+.add-history-form form .date button, .add-history-form form .staff button, .add-history-form form .amount button {
+  background-color: #4cb0f3;
+  border: 1px solid black;
+  border-radius: 2px;
+  margin-left: 2px;
+  padding: 3px;
+  font-weight: 500;
+}
+
+.add-history-form form .date button:hover, .add-history-form form .staff button:hover, .add-history-form form .amount button:hover {
+  background-color: #080897;
+  color: white;
+  cursor: pointer;
+}
+
+.add-history-form form #close-form-btn {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  font-size: 180%;
+  background-color: transparent;
+  border: none;
+}
+
+.add-history-form form #close-form-btn:hover {
+  transform: scale(0.85);
+  cursor: pointer;
+}
+
+.add-history-form form #save {
+  display: block;
+  background-color: rgba(28, 28, 248, 0.822);
+  font-size: 100%;
+  border: none;
+  border-radius: 2px;
+  padding: 5px 60px;
+  margin: auto;
+}
+
+.add-history-form form #save:hover {
+  background-color: #080897;
+  color: white;
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .add-history-form form {
+    height: 350px;
+  }
+  .add-history-form form .date, .add-history-form form .staff, .add-history-form form .amount {
+    flex-direction: column;
+  }
+}
+/*# sourceMappingURL=addRecord.css.map */

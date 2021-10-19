@@ -12,7 +12,7 @@ body {
 
 .header {
   position: relative;
-  background-color: rgba(28, 28, 248, 0.822);
+  background-color: rgba(28, 28, 199, 0.822);
   height: 160px;
   max-width: 100%;
 }
@@ -54,7 +54,7 @@ body {
 
 .header .lang-convert {
   position: absolute;
-  right: 50px;
+  right: 70px;
   top: 110px;
 }
 
@@ -76,8 +76,8 @@ body {
   padding-top: 5px;
   width: 20%;
   float: left;
-  min-height: 450px;
-  background-color: #4cb0f3;
+  min-height: 550px;
+  background-color: rgba(70, 173, 241, 0.767);
 }
 
 .navigation ul {
@@ -92,7 +92,7 @@ body {
 
 .navigation ul li:hover {
   cursor: pointer;
-  background-color: rgba(28, 28, 248, 0.822);
+  background-color: rgba(28, 28, 199, 0.822);
 }
 
 .navigation .selected {
@@ -153,13 +153,13 @@ body {
 }
 
 .content #clo-pour-history table #title th {
-  background-color: rgba(28, 28, 248, 0.822);
+  background-color: rgba(28, 28, 199, 0.822);
   padding: 5px;
   width: 250px;
 }
 
 .content #clo-pour-history table #content th {
-  background-color: #4cb0f3;
+  background-color: rgba(70, 173, 241, 0.767);
   padding: 5px;
 }
 
@@ -183,6 +183,22 @@ body {
   box-shadow: 0px 2px 3px black;
 }
 
+@media screen and (max-width: 1080px) {
+  .header .title {
+    margin-left: 60px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .header .title {
+    font-size: 110%;
+    margin-left: 10px;
+  }
+  .content #clo-pour-history #add-history {
+    left: 90%;
+  }
+}
+
 @media screen and (max-width: 480px) {
   body {
     position: relative;
@@ -194,13 +210,23 @@ body {
     width: 80px;
     height: 80px;
   }
+  .header .register {
+    position: absolute;
+    margin: 0;
+    top: 30px;
+    right: 30px;
+  }
   .header .title {
     line-height: 50px;
     font-size: 110%;
     margin: 0;
     position: absolute;
-    left: 11px;
+    left: 12px;
     top: 100px;
+  }
+  .header .lang-convert {
+    top: 76px;
+    right: 36px;
   }
   .navigation {
     width: 100%;
@@ -234,6 +260,12 @@ body {
   }
   .content #clo-pour-history #add-history {
     left: 240px;
+  }
+}
+
+@media (max-width: 324px) {
+  .header .title {
+    display: none;
   }
 }
 /*# sourceMappingURL=app.css.map */

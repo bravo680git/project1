@@ -1,0 +1,126 @@
+$fontSize: 20px;
+$firstColor: rgba(28, 28, 248, 0.822) ;
+$secondColor: rgb(76, 176, 243);
+$thirthColor: rgb(8, 8, 151);
+$screenWidth: 100vw;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-size: $fontSize;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.add-history-form {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.685);
+    z-index: 999;
+
+    form {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        background-color: white;
+        width: 90%;
+        height: 250px;
+        border-radius: 20px;
+        border: 1px solid $firstColor;
+
+        .title {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .date, .staff, .amount {
+            margin: 15px 10px;
+            display: flex;
+            margin-right: 40px;
+            input {
+                flex: 1;
+                height: 30px;
+                border:1px solid black;
+                border-radius: 2px;
+                font-size: 100%;
+                padding-left: 5px;
+            }
+            
+            label {
+                min-width: 80px;
+                
+                &::before {
+                    content: "";
+                    border-left: 3px solid $firstColor;
+                    margin-right: 8px;
+                    line-height: 10px;
+                }
+            }
+
+            button {
+                background-color: $secondColor;
+                border: 1px solid black;
+                border-radius: 2px;
+                margin-left: 2px;
+                padding: 3px;
+                font-weight: 500;
+
+                &:hover {
+                    background-color: $thirthColor;
+                    color: white;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        #close-form-btn {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            font-size: 180%;
+            background-color: transparent;
+            border: none;
+
+            &:hover {
+                transform: scale(0.85);
+                cursor: pointer;
+            }
+        }
+
+        #save {
+            display: block;
+            background-color: $firstColor;
+            font-size: 100%;
+            border: none;
+            border-radius: 2px;
+            padding: 5px 60px;
+            margin: auto;
+
+            &:hover {
+                background-color: $thirthColor;
+                color: white;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .add-history-form {
+        form {
+            height: 350px;
+
+            .date,.staff,.amount {
+                flex-direction: column;
+            }
+        }
+    }
+    
+}

@@ -1,6 +1,6 @@
 $fontSize: 20px;
-$firstColor: rgba(28, 28, 248, 0.822) ;
-$secondColor: rgb(76, 176, 243);
+$firstColor: rgba(28, 28, 199, 0.822) ;
+$secondColor: rgba(70, 173, 241, 0.767);
 $thirthColor: rgb(8, 8, 151);
 $screenWidth: 100vw;
 
@@ -16,6 +16,7 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+//---------------------Header-----------------------
 .header {
     position: relative;
     background-color: $firstColor;
@@ -60,7 +61,7 @@ body {
 
     .lang-convert {
         position: absolute;
-        right: 50px;
+        right: 70px;
         top: 110px;
         #vi, #en {
             background-color: transparent;
@@ -78,11 +79,12 @@ body {
     }
 }
 
+//-----------------------------Navigation-----------------------------
 .navigation {
     padding-top: 5px;
     width: 20%;
     float: left;
-    min-height: 450px;
+    min-height: 550px;
     background-color: $secondColor;
     ul {
         list-style: none;
@@ -106,6 +108,7 @@ body {
     }
 }
 
+//--------------------------Content---------------------------------------
 .content {
     float: left;
     width: 80%;
@@ -191,6 +194,31 @@ body {
     }
 }
 
+//-------------------------Repsponsive----------------------------------------
+@media screen and (max-width: 1080px){
+    .header {
+        .title {
+            margin-left: 60px;
+        }
+    }
+}
+
+@media screen and (max-width: 800px){
+    .header {
+        .title {
+            font-size: 110%;
+            margin-left: 10px;
+        }
+    }
+
+    .content {
+        #clo-pour-history {
+            #add-history {
+                left: 90%;
+            }
+        }
+    }
+}
 
 @media screen and( max-width: 480px) {
     body {
@@ -203,13 +231,25 @@ body {
             height: 80px;
         }
 
+        .register {
+            position: absolute;
+            margin: 0;
+            top: 30px;
+            right: 30px;
+        }
+
         .title {
             line-height: 50px;
             font-size: 110%;
             margin: 0;
             position: absolute;
-            left: 11px;
+            left: 12px;
             top: 100px;
+        }
+
+        .lang-convert {
+            top: 76px;
+            right: 36px;
         }
     }
 
@@ -238,8 +278,7 @@ body {
     .content {
         z-index: 1;
         #location {
-            top:0;
-            
+            top:0;    
         }
 
         #time {
@@ -251,6 +290,14 @@ body {
             #add-history {
                 left: 240px;
             }
+        }
+    }
+}
+
+@media (max-width: 324px) {
+    .header {
+        .title {
+            display: none;
         }
     }
 }

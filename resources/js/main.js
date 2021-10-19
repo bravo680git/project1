@@ -1,38 +1,31 @@
-import {loadLoginForm,logIn,logInState} from './login.js'
+import {loadLoginForm,logIn} from './login.js'
 import {loadingApp} from './app.js'
 import {vi,en} from './lang.js'
 
+mainOperate()
 
-start(en)
-    .then(()=>{
-        return new Promise(resolve =>{
-            handleClickBtn('#login-btn',()=>{
-                loadLoginForm(en)
-                resolve()
-                })
-        })
-    })
-    .then(()=>{
+function mainOperate() {
+    start()
+    .then((lang)=>{
         return new Promise(resolve =>{
             handleClickBtn('.submit-btn',()=>{
-                logIn()
-                resolve()
+                logIn(lang)
+                resolve(lang)
             })
         })
     })
-    .then(()=>{
-        return new Promise(resolve=>{
-            document.getElementById('login-btn').remove()
-            resolve()
+    .then((lang)=>{
+        return new Promise(resolve =>{
+            loadingApp(lang)
         })
     })
-
-    
+}
+   
 //Define function
 
-function start(lang) {
+function start(lang=en) {
     return new Promise(resolve => {
-        loadingApp(lang)
+        loadLoginForm(lang)
         resolve(lang)
     })
 }
@@ -41,3 +34,4 @@ function handleClickBtn(btnInfo,event) {
     let myBtn= document.querySelector(btnInfo)
     myBtn.onclick=event
 }
+
