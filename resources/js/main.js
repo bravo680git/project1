@@ -4,7 +4,7 @@ import {vi,en} from './lang.js'
 
 mainOperate()
 
-function mainOperate() {
+export function mainOperate() {
     start()
     .then((lang)=>{
         return new Promise(resolve =>{

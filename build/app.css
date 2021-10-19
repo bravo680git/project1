@@ -12,7 +12,7 @@ body {
 
 .header {
   position: relative;
-  background-color: rgba(28, 28, 199, 0.822);
+  background-color: #0795df;
   height: 160px;
   max-width: 100%;
 }
@@ -77,7 +77,7 @@ body {
   width: 20%;
   float: left;
   min-height: 550px;
-  background-color: rgba(70, 173, 241, 0.767);
+  background-color: #047d9b;
 }
 
 .navigation ul {
@@ -92,11 +92,11 @@ body {
 
 .navigation ul li:hover {
   cursor: pointer;
-  background-color: rgba(28, 28, 199, 0.822);
+  background-color: #0795df;
 }
 
 .navigation .selected {
-  background-color: #080897;
+  background-color: #06067c;
 }
 
 .navigation .open {
@@ -135,41 +135,42 @@ body {
   left: 30px;
 }
 
-.content #clo-concentration {
+.content #cloConcentration {
   position: absolute;
   top: 140px;
   left: 30px;
 }
 
-.content #clo-pour-history {
+.content #cloPourHistory {
   position: absolute;
   top: 180px;
   left: 30px;
 }
 
-.content #clo-pour-history table {
+.content #cloPourHistory table {
   margin-top: 20px;
   border: 2px solid black;
+  color: white;
 }
 
-.content #clo-pour-history table #title th {
-  background-color: rgba(28, 28, 199, 0.822);
+.content #cloPourHistory table #title th {
+  background-color: #0795df;
   padding: 5px;
   width: 250px;
 }
 
-.content #clo-pour-history table #content th {
-  background-color: rgba(70, 173, 241, 0.767);
+.content #cloPourHistory table #content th {
+  background-color: #047d9b;
   padding: 5px;
 }
 
-.content #clo-pour-history #add-history {
+.content #cloPourHistory #add-history {
   position: absolute;
   top: 0px;
   left: 730px;
 }
 
-.content #clo-pour-history #add-history button {
+.content #cloPourHistory #add-history button {
   width: 25px;
   height: 25px;
   font-size: 100%;
@@ -177,7 +178,7 @@ body {
   border: 2px solid black;
 }
 
-.content #clo-pour-history #add-history button:hover {
+.content #cloPourHistory #add-history button:hover {
   cursor: pointer;
   transform: scale(1.1);
   box-shadow: 0px 2px 3px black;

@@ -1,7 +1,7 @@
 $fontSize: 20px;
-$firstColor: rgba(28, 28, 199, 0.822) ;
-$secondColor: rgba(70, 173, 241, 0.767);
-$thirthColor: rgb(8, 8, 151);
+$firstColor: #0795df ;
+$secondColor: #047d9b;
+$thirthColor: rgb(6, 6, 124);
 $screenWidth: 100vw;
 
 * {
@@ -141,13 +141,13 @@ body {
         left: $marginLeft;
     }
 
-    #clo-concentration {
+    #cloConcentration {
         position: absolute;
         top: 140px;
         left: $marginLeft;
     }
 
-    #clo-pour-history {
+    #cloPourHistory {
         position: absolute;
         top: 180px;
         left: $marginLeft;
@@ -155,6 +155,7 @@ body {
         table {
             margin-top: 20px;
             border: 2px solid black;
+            color: white;
             
             #title {
                 th {

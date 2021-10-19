@@ -3,8 +3,8 @@ import { logOut } from "./login.js"
 import { loadAddForm } from "./addCloPourHis.js"
 
 let language=en;
-export function loadingApp(lang) {
-    
+
+export function loadingApp(lang) {  
     let root=document.getElementById('main')
     let myApp=document.createElement('div')
     myApp.innerHTML=app(lang)
@@ -15,21 +15,61 @@ export function loadingApp(lang) {
     changSelectedChild()
 
     changeLanguage(myApp)
-    
-    document.getElementById('logOut-btn').onclick=logOut
 
-    let addHistoryBtn=document.getElementById('add-history')
-    addHistoryBtn.onclick=()=>{
+    document.getElementById('add-history').onclick=()=>{
         loadAddForm(language)
     }
+    
+    document.getElementById('logOut-btn').onclick=()=>{
+        logOut()
+        handleLogOut(language)
+        document.getElementById('logIn-btn').onclick=()=>{
+            location.reload()
+        }
+    }
+    let data=getData()
+    console.log(data);
+}
+// let renderList=['location','time','length','pressure','cloConcentration']
+function renderData(itemId,data) {
+        let renderItem=document.createElement('span')
+        renderItem.innerText=data
+        let itemBox=document.getElementById(box)
+        itemBox.appendChild(renderItem)
 }
 
-function renderData(data) {
-    let idList=['location','time','length','pressure','clo-concentration']
+function getData() {
+    let Data
+    fetch('./fakeData.json')
+        .then(response=>response.json())
+        .then(data=>{
+            Data=data
+            console.log(Data);
+        })
+        console.log(Data);
+    return Data
 }
 
 function addCloPourHis() {
 
+}
+
+function handleLogOut(lang) {
+    document.querySelector('.navigation').remove()
+    document.querySelector('.content').remove()
+    document.querySelector('#logOut-btn').remove()
+    document.querySelector('.lang-convert').remove()
+
+    let newRegisterBtn = document.createElement('div')
+    newRegisterBtn.classList.add('register')
+    newRegisterBtn.id = "logIn-btn"
+    newRegisterBtn.innerHTML = `
+                <div class="icon">
+                    <i class="fas fa-sign-in-alt"></i>
+                </div>
+                ${lang.logIn}
+        `
+    document.getElementsByTagName('header')[0].appendChild(newRegisterBtn)
 }
 
 function changeLanguage(myApp) {
@@ -93,17 +133,16 @@ function app(lang) {
             <div class="title">
                 ${lang.mainTitle}
             </div>
-            <div class="register" id="logOut-btn">
-                <div class="icon">
-                    <i class="far fa-user"></i>
-                </div>
-                ${lang.logOut}
-            </div>
             <div class="lang-convert">
                 <button id="vi">vietnamese</button>
                 <button id="en">english</button>
             </div>
-            
+            <div class="register" id="logOut-btn">
+                <div class="icon">
+                <i class="fas fa-sign-out-alt"></i>
+                </div>
+                ${lang.logOut}
+            </div>    
         </header>
        </div>
 
@@ -128,10 +167,10 @@ function app(lang) {
             <div id="pressure">
             ${lang.pres} 
             </div>
-            <div id="clo-concentration">
+            <div id="cloConcentration">
             ${lang.cloConcen}
             </div>
-            <div id="clo-pour-history">
+            <div id="cloPourHistory">
                 ${lang.cloHist}
                 <table>
                     <tr id="title">
