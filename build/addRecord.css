@@ -26,6 +26,7 @@ body {
   transform: translate(-50%, -50%);
   background-color: white;
   width: 90%;
+  max-width: 600px;
   height: 250px;
   border-radius: 20px;
   border: 1px solid rgba(28, 28, 248, 0.822);
@@ -52,7 +53,7 @@ body {
 }
 
 .add-history-form form .date label, .add-history-form form .staff label, .add-history-form form .amount label {
-  min-width: 80px;
+  min-width: 112px;
 }
 
 .add-history-form form .date label::before, .add-history-form form .staff label::before, .add-history-form form .amount label::before {

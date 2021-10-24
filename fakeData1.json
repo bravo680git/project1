@@ -1,0 +1,59 @@
+
+[
+    {
+      "stationID": 1,
+      "stationName": "Station D-10",
+      "stationAddress": "268 Ly Thuong Kiet street-HCMC",
+      "waterFlowControlSystems": [
+        {
+          "waterFlowControlSystemID": 1,
+          "waterFlowControlSystemName": "W1-D10",
+          "waterTemperature": 32.5,
+          "waterVelocity": 52.3,
+          "waterPressure": 60,
+          "stationID": 1,
+          "controlValves": [
+            {
+              "controlValveID": 1,
+              "controlValveName": "V1-W1-D10",
+              "controlIndexType": "water pressure",
+              "index": 33.3,
+              "openingPercent": 20,
+              "controlValveStatus": true,
+              "waterFlowControlSystemID": 1
+            }
+          ]
+        }
+      ],
+      "processingSystems": [
+        {
+          "processingSystemID": 1,
+          "processingSystemName": "P1-D10",
+          "waterLevel": 6,
+          "waterPressure": 67,
+          "chlorineConcentration": 32,
+          "stationID": 1,
+          "chlorineInjections": [
+            {
+              "chlorineInjectionID": 1,
+              "chlorineVolume": 60,
+              "employeeName": "Nguyen Van A",
+              "injectionTime": "2021-10-23T09:38:48",
+              "processingSystemID": 1
+            }
+          ]
+        },
+        {
+          "processingSystemID": 3,
+          "processingSystemName": "P2-D10",
+          "waterLevel": 7,
+          "waterPressure": 67,
+          "chlorineConcentration": 32,
+          "stationID": 1,
+          "chlorineInjections": [
+            
+          ]
+        }
+      ]
+    }
+  ]

@@ -1,32 +1,34 @@
 import {loadLoginForm,logIn} from './login.js'
-import {loadingApp} from './app.js'
+import {loadingApp,renderData} from './app.js'
 import {vi,en} from './lang.js'
 
 mainOperate()
-
-export function mainOperate() {
-    start()
-    .then((lang)=>{
-        return new Promise(resolve =>{
-            handleClickBtn('.submit-btn',()=>{
-                logIn(lang)
-                resolve(lang)
-            })
-        })
-    })
-    .then((lang)=>{
-        return new Promise(resolve =>{
-            loadingApp(lang)
-        })
-    })
-}
-   
+ 
 //Define function
+function mainOperate() {
+    start()
+    .then(()=>{
+        return new Promise(resolve =>{
+            loadingApp()
+            resolve()
+        })
+    })
+    .then(renderData)
+}
 
-function start(lang=en) {
+function start(lang = en) {
+    let isLogin = sessionStorage.getItem('isLogin')
+
     return new Promise(resolve => {
-        loadLoginForm(lang)
-        resolve(lang)
+        if (isLogin == "true") {
+            resolve()
+        }
+        else {
+            loadLoginForm(lang)
+            handleClickBtn('.submit-btn', () => {
+                logIn(resolve)
+            })
+        }
     })
 }
 

@@ -2,25 +2,36 @@ let loginAPI=''
 let root =document.querySelector('#main')
 let Form
 
-export function logIn() {
-    fetch(loginAPI)
+export function logIn(callback) {
+    let username=Form.querySelector('#username').value
+    let password=Form.querySelector('#password').value
+    let account= {
+        username:username,
+        password:password
+    }
+    let options= {
+        method: "POST",
+        body: JSON.stringify(account)
+    }
+
+    fetch(loginAPI,options)
         .then(response => response.json)
-        .then(data =>{
-            sessionStorage.setItem("loginToken",data[0])
-            sessionStorage.setItem("isLogin",true)
+        .then(data => {
+            sessionStorage.setItem("loginToken", data[0])
+            sessionStorage.setItem("isLogin", "true")
 
             root.removeChild(Form)
+            callback()
         })
         .catch(error => {
-            alert(error)
-
-            // root.removeChild(Form)
+            console.log(error);
+            falseAccountError()
         })
 }
 
 export function logOut() {
     sessionStorage.removeItem("loginToken")
-    sessionStorage.setItem("isLogin",false)
+    sessionStorage.setItem("isLogin","false")
 }
 
 export function loadLoginForm(lang) {
@@ -29,13 +40,18 @@ export function loadLoginForm(lang) {
     root.appendChild(Form)
 }
 
+function falseAccountError() {
+    let errorMessage='Username or password wrong!'
+    document.getElementById('error').innerText=errorMessage
+}
+
 // Create Login Form
 function loginForm(lang) {
     return `
     <div class="login-box">
         <div class="login-form">
             <form >
-                <img class="login-logo" src="../resources/images/logo_sistech.png" alt="Sistech logo">
+                <img class="login-logo" src="../resources/images/logo_sistech.jpg" alt="Sistech logo">
                 <div class="login-logo-label">${lang.logIn}</div>
                 <div class="form-input">
                     <i class="fas fa-user-alt input-icon"></i>

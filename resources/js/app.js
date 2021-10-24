@@ -1,24 +1,30 @@
 import { vi,en } from "./lang.js"
 import { logOut } from "./login.js"
 import { loadAddForm } from "./addCloPourHis.js"
+import {Header,Navigation,SystemValue,CloSystem} from './components.js'
+import {makeProgressBar} from './progressBar.js'
 
-let language=en;
+let loop
+let cycleTime=10000000
+let stationTempId
+let language=en
+if (localStorage.getItem('language')=='en') {
+    language=en
+}
+else {
+    language=vi
+}
 
-export function loadingApp(lang) {  
+
+export function loadingApp() {  
     let root=document.getElementById('main')
     let myApp=document.createElement('div')
-    myApp.innerHTML=app(lang)
+    myApp.innerHTML=App(language)
     root.appendChild(myApp)
 
-    openClodeNav()
+    document.getElementById('open-close-btn').onclick=openClodeNav
 
-    changSelectedChild()
-
-    changeLanguage(myApp)
-
-    document.getElementById('add-history').onclick=()=>{
-        loadAddForm(language)
-    }
+    changeLanguage()
     
     document.getElementById('logOut-btn').onclick=()=>{
         logOut()
@@ -27,31 +33,161 @@ export function loadingApp(lang) {
             location.reload()
         }
     }
-    let data=getData()
-    console.log(data);
-}
-// let renderList=['location','time','length','pressure','cloConcentration']
-function renderData(itemId,data) {
-        let renderItem=document.createElement('span')
-        renderItem.innerText=data
-        let itemBox=document.getElementById(box)
-        itemBox.appendChild(renderItem)
-}
 
-function getData() {
-    let Data
-    fetch('./fakeData.json')
+} 
+
+export function renderData() {
+    fetch('../fakeData.json')
         .then(response=>response.json())
         .then(data=>{
-            Data=data
-            console.log(Data);
-        })
-        console.log(Data);
-    return Data
+            renderList(data)
+            clearInterval(loop)
+            renderValuesOfStation(1)
+            loop=setInterval(()=>{
+                renderValuesOfStation(1)
+            },cycleTime)
+            handleChangSelectedStation()
+        })        
 }
 
-function addCloPourHis() {
+function renderList(data) {
+    let listBox = document.getElementById('pumpStationList')
+    data.map(item => {
+        let stattionLi = document.createElement('li')
+        stattionLi.id=item.stationID
+        stattionLi.innerText = item.stationName
+        listBox.appendChild(stattionLi)
+    })
+    listBox.childNodes[1].classList.add('selected')
+    handleChangSelectedStation()
+}
 
+function renderValuesOfStation(stationId) {
+    fetch("../fakeData" + stationId + ".json")
+        .then(resopnse => resopnse.json())
+        .then(data => {
+
+            if (document.getElementById('subContent')) {
+                document.getElementById('subContent').remove()
+            }
+
+            let contentBox = document.getElementById('content')
+            let content = document.createElement('div')
+            content.id = "subContent"
+            content.innerHTML = `
+            <div id="location">${language.loca}
+                    </div>
+                    <div id="time">
+                        ${language.time}
+                    </div>
+            `
+            contentBox.appendChild(content)
+
+            renderValue("location", data[0].stationAddress)
+            renderCloSystems(data[0].processingSystems, stationId)
+        })
+}
+
+//Dữ liệu cac hệ thống châm clo của 1 trạm bơm được đưa ra cac thẻ
+function renderCloSystems(data,stationId) {
+    let content=document.getElementById("subContent")
+    data.map((item)=>{
+        let systemItem=document.createElement('div')
+        systemItem.id="cloSystems"+item.processingSystemID
+        systemItem.classList.add('cloSystem')
+        systemItem.innerHTML=CloSystem(item,language)
+        content.appendChild(systemItem)
+
+        makeProgressBar(250,0,10,item.waterLevel,".levelProgress-"+item.processingSystemID)
+        makeProgressBar(250,0,100,item.chlorineConcentration,".cloConcentrationProgress-"+item.processingSystemID)
+        makeProgressBar(250,0,100,item.waterPressure,".pressureProgress-"+item.processingSystemID)
+        
+        systemItem.querySelector('#showHistory').onclick=()=>{
+            renderHistoryTable(item.chlorineInjections,item.processingSystemName,stationId)
+            document.getElementById('open-close-btn').style.visibility="hidden"
+            clearInterval(loop)
+        }
+    })
+    
+}
+
+function renderHistoryTable(data,systemName,stationId) {
+
+    if (document.getElementById('subContent')) {
+        document.getElementById('subContent').remove()
+    }
+
+    let contentBox=document.getElementById('content')
+    let systemValuePage=document.createElement('div')
+    systemValuePage.id="subContent"
+    systemValuePage.innerHTML=SystemValue(language)
+    contentBox.appendChild(systemValuePage)
+
+    document.getElementById('add-history').onclick=()=>{
+        loadAddForm(language)
+    }
+
+    document.getElementById('return').onclick=()=>{
+        clearInterval(loop)
+        renderValuesOfStation(stationId)
+        loop=setInterval(()=>{
+            renderValuesOfStation(stationId)
+        },cycleTime)
+        if (screen.width<=480) {
+            document.getElementById('open-close-btn').style.visibility="visible"
+        } 
+    }
+
+    document.getElementById('systemName').innerText=systemName
+    let table=document.querySelector('table')
+
+    data.map(rowData=>{
+        let tableRow=createRowOfTable(rowData)
+        table.appendChild(tableRow)
+    })
+}
+
+function createRowOfTable(data) {
+    let row = document.createElement('tr')
+    row.classList.add('tableContent')
+    row.innerHTML = `
+        <th>${data.injectionTime}</th>
+        <th>${data.employeeName}</th>
+        <th>${data.chlorineVolume}</th>
+        `
+    return row
+}
+
+function handleChangSelectedStation() {
+    let pumpStationList=document.getElementById('pumpStationList').childNodes
+    for (let i=0;i<pumpStationList.length;i++) {
+        let child=pumpStationList[i]
+
+        child.onclick=(e)=>{
+            stationTempId=e.target.id
+            document.querySelector('.selected').classList.remove('selected')
+            child.classList.add('selected')
+            clearInterval(loop)
+            renderValuesOfStation(stationTempId)   
+            loop=setInterval(()=>{
+                renderValuesOfStation(stationTempId)
+            },cycleTime)
+            if (screen.width <= 480) {
+                openClodeNav()
+            }
+        }
+    }
+}
+
+function renderValue(itemId,data) {
+    let renderItem=document.createElement('span')
+    renderItem.innerText=data
+
+    let itemBox=document.getElementById(itemId)
+    if (itemBox.childNodes[1]) {
+        itemBox.removeChild(itemBox.lastChild)
+    }
+    itemBox.appendChild(renderItem)
 }
 
 function handleLogOut(lang) {
@@ -70,131 +206,57 @@ function handleLogOut(lang) {
                 ${lang.logIn}
         `
     document.getElementsByTagName('header')[0].appendChild(newRegisterBtn)
+    clearInterval(loop)
 }
 
-function changeLanguage(myApp) {
+function changeLanguage() {
     document.getElementById('vi').onclick=()=>{
-        myApp.remove()
-        loadingApp(vi)
-        language=vi
+        localStorage.setItem('language','vi')
+        location.reload()
     }
-    document.getElementById('en').onclick=()=>{
-        myApp.remove()
-        loadingApp(en)
-        language=en
-    }
-}
 
-function changSelectedChild() {
-    let pumpStationList=document.getElementById('pumpStationList').childNodes
-    for (let i=0;2*i+1<pumpStationList.length;i++) {
-        let child=pumpStationList[2*i+1]
-        child.onclick=()=>{
-            document.querySelector('.selected').classList.remove('selected')
-            child.classList.add('selected')
-        }
+    document.getElementById('en').onclick=()=>{
+        localStorage.setItem('language','en')  
+        location.reload()
     }
+    
 }
 
 function openClodeNav() {
     let openCloseBtn=document.getElementById('open-close-btn')
-    let navigation=document.querySelector('.navigation ')
-    let content=document.querySelector('.content')
+    let navigation = document.querySelector('.navigation ')
+    let content = document.querySelector('.content')
 
-    openCloseBtn.onclick=()=>{
-        if (openCloseBtn.classList.contains('open')) {
-            openCloseBtn.classList.remove('open')
-            openCloseBtn.classList.add('close')
-            openCloseBtn.classList.remove('fa-chevron-right')
-            openCloseBtn.classList.add('fa-chevron-left')
-            navigation.style.marginLeft="0"
-            content.style.visibility="hidden"
-         }
-         else {
-            openCloseBtn.classList.remove('close')
-            openCloseBtn.classList.add('open')
-            openCloseBtn.classList.remove('fa-chevron-left')
-            openCloseBtn.classList.add('fa-chevron-right')
-            navigation.style.marginLeft="-410px"
-            content.style.visibility="visible"
-         }
+    window.scrollTo(0, 0)
+    if (openCloseBtn.classList.contains('open')) {
+        openCloseBtn.classList.remove('open')
+        openCloseBtn.classList.add('close')
+        openCloseBtn.classList.remove('fa-chevron-right')
+        openCloseBtn.classList.add('fa-chevron-left')
+        navigation.style.marginLeft = "0"
+        content.style.visibility = "hidden"
     }
+    else {
+        openCloseBtn.classList.remove('close')
+        openCloseBtn.classList.add('open')
+        openCloseBtn.classList.remove('fa-chevron-left')
+        openCloseBtn.classList.add('fa-chevron-right')
+        navigation.style.marginLeft = "-400px"
+        content.style.visibility = "visible"
+    }
+
 }
 
-function app(lang) {
+function App(lang) {
 
     return `
     <div>
-       <div class="header">
-        <header>
-            <div>
-                <img class="logo" src="./resources/images/logo_sistech.png" alt="logo">
-            </div>
-            <div class="title">
-                ${lang.mainTitle}
-            </div>
-            <div class="lang-convert">
-                <button id="vi">vietnamese</button>
-                <button id="en">english</button>
-            </div>
-            <div class="register" id="logOut-btn">
-                <div class="icon">
-                <i class="fas fa-sign-out-alt"></i>
-                </div>
-                ${lang.logOut}
-            </div>    
-        </header>
-       </div>
+        ${Header(lang)}
+        ${Navigation()}
 
-       <div class="navigation">
-            <ul id="pumpStationList">
-                <li class="selected">Tram bom 1</li>
-                <li>Tram bom 2</li>
-                <li>Tram bom 3</li>
-            </ul>
-            <i  id="open-close-btn" class="open fas fa-chevron-right""></i>
-       </div>
-
-       <div class="content">
-            <div id="location">${lang.loca}
-            </div>
-            <div id="time">
-            ${lang.time}
-            </div>
-            <div id="length">
-            ${lang.len} 
-            </div>
-            <div id="pressure">
-            ${lang.pres} 
-            </div>
-            <div id="cloConcentration">
-            ${lang.cloConcen}
-            </div>
-            <div id="cloPourHistory">
-                ${lang.cloHist}
-                <table>
-                    <tr id="title">
-                        <th>${lang.tableTime}</th>
-                        <th>${lang.tableEmp}</th>
-                        <th>${lang.tableCloAmount}</th>
-                    </tr>
-                    <tr id="content">
-                        <th>1</th>
-                        <th>2</th>
-                        <th>3</th>
-                    </tr>
-                    <tr id="content">
-                        <th>1</th>
-                        <th>2</th>
-                        <th>3</th>
-                    </tr>
-                </table>
-                <div id="add-history">
-                    <button title="Thêm nhật ký châm Clo"><i class="fas fa-plus"></i></button>
-                </div>
-            </div>
-       </div>
+        <div class="content" id="content">
+            
+        </div>
     </div>
-
     `
 }

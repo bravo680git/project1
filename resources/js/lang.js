@@ -11,7 +11,7 @@ export const vi={
     len:"Mực nước: ",
     pres:"Áp suất: ",
     cloConcen:"Nồng độ Clo: ",
-    cloHist:"Lịch sử châm Clo: ",
+    cloHist:"Lịch sử châm Clo",
     tableTime:"Thời gian",
     tableEmp:"Nhân viên",
     tableCloAmount:"Lượng Clo",
@@ -22,7 +22,7 @@ export const vi={
 }
 
 export const en={
-    mainTitle:"Pump station monitoring program",
+    mainTitle:"Pump station monitor program",
     logIn:"Log In",
     logOut:"Log Out",
     username:"Username",
@@ -32,7 +32,7 @@ export const en={
     len:"Water level: ",
     pres:"Pressure: ",
     cloConcen:"Chlorine concentration: ",
-    cloHist:"Clo pouring history list: ",
+    cloHist:"Clo pouring history list",
     tableTime:"Date",
     tableEmp:"Staff",
     tableCloAmount:"Amount of Chlorine",

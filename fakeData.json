@@ -1,27 +1,87 @@
 
-    [
-        {
-        "name":"Quan 10",
-        "location":"227 Hoa Hao,quan 10",
-        "time":"11h22m, 10/01/2001",
-        "length":"75",
-        "pressure":"2,5",
-        "cloConcentration":"16,67"
-        },
-        {
-        "name":"Quan 5",
-        "location":"135 Pham Van Dong",
-        "time":"16h15m, 20/01/2030",
-        "length":"14",
-        "pressure":"8,5",
-        "cloConcentration":"100"
-        },
-        {
-        "name":"Quan 2",
-        "location":"368 Ung Gia Khiem",
-        "time":"6h15m, 30/10/2001",
-        "length":"46",
-        "pressure":"14",
-        "cloConcentration":"12"
-        }
+[
+  {
+    "stationID": 1,
+    "stationName": "Station D-10",
+    "stationAddress": "268 Ly Thuong Kiet street-HCMC",
+    "waterFlowControlSystems": [
+      {
+        "waterFlowControlSystemID": 1,
+        "waterFlowControlSystemName": "W1-D10",
+        "waterTemperature": 32.5,
+        "waterVelocity": 52.3,
+        "waterPressure": 60,
+        "stationID": 1,
+        "controlValves": [
+          
+        ]
+      }
+    ],
+    "processingSystems": [
+      {
+        "processingSystemID": 1,
+        "processingSystemName": "P1-D10",
+        "waterLevel": 6,
+        "waterPressure": 67,
+        "chlorineConcentration": 32,
+        "stationID": 1,
+        "chlorineInjections": [
+          
+        ]
+      },
+      {
+        "processingSystemID": 3,
+        "processingSystemName": "P2-D10",
+        "waterLevel": 7,
+        "waterPressure": 67,
+        "chlorineConcentration": 32,
+        "stationID": 1,
+        "chlorineInjections": [
+          
+        ]
+      }
     ]
+  },
+  {
+    "stationID": 2,
+    "stationName": "Station Binh Duong",
+    "stationAddress": "Zone 1-UNI Vil-Binh Duong",
+    "waterFlowControlSystems": [
+      {
+        "waterFlowControlSystemID": 2,
+        "waterFlowControlSystemName": "W1-BD",
+        "waterTemperature": 33.4,
+        "waterVelocity": 70.7,
+        "waterPressure": 65,
+        "stationID": 2,
+        "controlValves": [
+          
+        ]
+      }
+    ],
+    "processingSystems": [
+      {
+        "processingSystemID": 2,
+        "processingSystemName": "P1-BD",
+        "waterLevel": 8,
+        "waterPressure": 70,
+        "chlorineConcentration": 27,
+        "stationID": 2,
+        "chlorineInjections": [
+          
+        ]
+      }
+    ]
+  },
+  {
+    "stationID": 3,
+    "stationName": "Station Dan Lap",
+    "stationAddress": "PQ 16-District 12-HCMC",
+    "waterFlowControlSystems": [
+      
+    ],
+    "processingSystems": [
+      
+    ]
+  }
+]
