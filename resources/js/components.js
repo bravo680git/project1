@@ -26,6 +26,14 @@ export function Header(lang) {
     `
 }
 
+export function Footer() {
+    return `
+    <footer>
+        <div>&copy;2021 by Bravo680</div>
+    </footer>
+    `
+}
+
 export function SystemValue(lang) {
     return `
     <div class="return" id="return"><i class="fas fa-chevron-left"></i></div>

@@ -8,6 +8,7 @@ body {
   font-size: 20px;
   width: 100vw;
   font-family: Arial, Helvetica, sans-serif;
+  height: 100%;
 }
 
 .header {
@@ -72,38 +73,44 @@ body {
   cursor: pointer;
 }
 
-.navigation {
+.body {
+  min-height: 420px;
+  background-size: cover;
+  height: fit-content;
+}
+
+.body .navigation {
   padding-top: 5px;
   width: 25%;
   float: left;
-  min-height: 550px;
+  min-height: 420px;
   background-color: #047d9b;
 }
 
-.navigation ul {
+.body .navigation ul {
   list-style: none;
 }
 
-.navigation ul li {
+.body .navigation ul li {
   padding: 10px 40px;
   color: white;
   font-weight: 600;
 }
 
-.navigation ul li:hover {
+.body .navigation ul li:hover {
   cursor: pointer;
   background-color: #06067c;
 }
 
-.navigation .selected {
+.body .navigation .selected {
   background-color: #06067c;
 }
 
-.navigation .open {
+.body .navigation .open {
   visibility: hidden;
 }
 
-.content {
+.body .content {
   float: left;
   width: 75%;
   margin-top: 20px;
@@ -111,7 +118,7 @@ body {
   position: relative;
 }
 
-.content .cloSystem {
+.body .content .cloSystem {
   background-color: rgba(53, 10, 153, 0.637);
   width: 290px;
   height: 312px;
@@ -121,7 +128,7 @@ body {
   margin: 5px;
 }
 
-.content .cloSystem .title {
+.body .content .cloSystem .title {
   text-align: center;
   font-size: 120%;
   font-weight: 600;
@@ -129,17 +136,17 @@ body {
   color: white;
 }
 
-.content .cloSystem .level, .content .cloSystem .pressure, .content .cloSystem .clo-concentration {
+.body .content .cloSystem .level, .body .content .cloSystem .pressure, .body .content .cloSystem .clo-concentration {
   margin-bottom: 10px;
   color: white;
 }
 
-.content .cloSystem .level > div, .content .cloSystem .pressure > div, .content .cloSystem .clo-concentration > div {
+.body .content .cloSystem .level > div, .body .content .cloSystem .pressure > div, .body .content .cloSystem .clo-concentration > div {
   margin-left: -5px;
   color: black;
 }
 
-.content .cloSystem .clo-pour-history {
+.body .content .cloSystem .clo-pour-history {
   background-color: blueviolet;
   width: 200px;
   text-align: center;
@@ -154,12 +161,12 @@ body {
   border: 1px solid black;
 }
 
-.content .cloSystem .clo-pour-history:hover {
+.body .content .cloSystem .clo-pour-history:hover {
   background-color: #06067c;
   cursor: pointer;
 }
 
-.content .return {
+.body .content .return {
   font-size: 200%;
   font-weight: 800;
   opacity: 0.6;
@@ -168,46 +175,46 @@ body {
   top: -20px;
 }
 
-.content .return:hover {
+.body .content .return:hover {
   cursor: pointer;
   opacity: 1;
 }
 
-.content #systemName {
+.body .content #systemName {
   text-align: center;
   font-size: 120%;
   font-weight: 500;
 }
 
-.content #cloPourHistory {
+.body .content #cloPourHistory {
   position: relative;
 }
 
-.content #cloPourHistory table {
+.body .content #cloPourHistory table {
   margin-top: 20px;
   border: 2px solid black;
   color: white;
   width: 96%;
 }
 
-.content #cloPourHistory table .tableTitle th {
+.body .content #cloPourHistory table .tableTitle th {
   background-color: #06067c;
   padding: 5px;
   width: 250px;
 }
 
-.content #cloPourHistory table .tableContent th {
+.body .content #cloPourHistory table .tableContent th {
   background-color: #047d9b;
   padding: 5px;
 }
 
-.content #cloPourHistory #add-history {
+.body .content #cloPourHistory #add-history {
   position: absolute;
   top: 0px;
   left: 90%;
 }
 
-.content #cloPourHistory #add-history button {
+.body .content #cloPourHistory #add-history button {
   width: 25px;
   height: 25px;
   font-size: 100%;
@@ -215,10 +222,17 @@ body {
   border: 2px solid black;
 }
 
-.content #cloPourHistory #add-history button:hover {
+.body .content #cloPourHistory #add-history button:hover {
   cursor: pointer;
   transform: scale(1.1);
   box-shadow: 0px 2px 3px black;
+}
+
+footer {
+  background-color: #ccc;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
 }
 
 @media (max-width: 480px) {
@@ -242,12 +256,13 @@ body {
     top: 76px;
     right: 50px;
   }
-  .navigation {
-    margin-left: -400px;
+  .body .navigation {
+    margin-left: -420px;
     width: 100%;
     position: relative;
+    height: 800px;
   }
-  .navigation .open {
+  .body .navigation .open {
     visibility: visible;
     position: fixed;
     left: 0px;
@@ -256,20 +271,20 @@ body {
     opacity: 0.6;
     z-index: 999;
   }
-  .navigation .open:hover {
+  .body .navigation .open:hover {
     opacity: 1;
   }
-  .navigation .close {
+  .body .navigation .close {
     position: fixed;
     top: 400px;
     right: 10px;
     font-size: 200%;
     opacity: 0.6;
   }
-  .navigation .close:hover {
+  .body .navigation .close:hover {
     opacity: 1;
   }
-  .content {
+  .body .content {
     width: 100%;
   }
 }

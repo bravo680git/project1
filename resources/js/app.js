@@ -1,7 +1,7 @@
 import { vi,en } from "./lang.js"
 import { logOut } from "./login.js"
 import { loadAddForm } from "./addCloPourHis.js"
-import {Header,Navigation,SystemValue,CloSystem} from './components.js'
+import {Header,Navigation,SystemValue,CloSystem,Footer} from './components.js'
 import {makeProgressBar} from './progressBar.js'
 
 let loop
@@ -20,6 +20,7 @@ export function loadingApp() {
     let root=document.getElementById('main')
     let myApp=document.createElement('div')
     myApp.innerHTML=App(language)
+    myApp.style.height="100%"
     root.appendChild(myApp)
 
     document.getElementById('open-close-btn').onclick=openClodeNav
@@ -36,20 +37,22 @@ export function loadingApp() {
 
 } 
 
+
+//Render data to app
 export function renderData() {
-    fetch('../fakeData.json')
+    fetch('https://water-test-training.herokuapp.com/stations/list')
         .then(response=>response.json())
         .then(data=>{
             renderList(data)
             clearInterval(loop)
-            renderValuesOfStation(1)
+            renderValuesOfStation(data[0].stationID)
             loop=setInterval(()=>{
-                renderValuesOfStation(1)
+                renderValuesOfStation(data[0].stationID)
             },cycleTime)
             handleChangSelectedStation()
         })        
 }
-
+    //list of stations
 function renderList(data) {
     let listBox = document.getElementById('pumpStationList')
     data.map(item => {
@@ -62,8 +65,29 @@ function renderList(data) {
     handleChangSelectedStation()
 }
 
+function handleChangSelectedStation() {
+    let pumpStationList=document.getElementById('pumpStationList').childNodes
+    for (let i=0;i<pumpStationList.length;i++) {
+        let child=pumpStationList[i]
+
+        child.onclick=(e)=>{
+            stationTempId=e.target.id
+            document.querySelector('.selected').classList.remove('selected')
+            child.classList.add('selected')
+            clearInterval(loop)
+            renderValuesOfStation(stationTempId)   
+            loop=setInterval(()=>{
+                renderValuesOfStation(stationTempId)
+            },cycleTime)
+            if (screen.width <= 480) {
+                openClodeNav()
+            }
+        }
+    }
+}
+
 function renderValuesOfStation(stationId) {
-    fetch("../fakeData" + stationId + ".json")
+    fetch("https://water-test-training.herokuapp.com/stations/" + stationId + "/details")
         .then(resopnse => resopnse.json())
         .then(data => {
 
@@ -76,10 +100,10 @@ function renderValuesOfStation(stationId) {
             content.id = "subContent"
             content.innerHTML = `
             <div id="location">${language.loca}
-                    </div>
-                    <div id="time">
-                        ${language.time}
-                    </div>
+            </div>
+            <div id="time">
+                ${language.time}
+            </div>
             `
             contentBox.appendChild(content)
 
@@ -87,8 +111,7 @@ function renderValuesOfStation(stationId) {
             renderCloSystems(data[0].processingSystems, stationId)
         })
 }
-
-//Dữ liệu cac hệ thống châm clo của 1 trạm bơm được đưa ra cac thẻ
+    //clo systems of a station
 function renderCloSystems(data,stationId) {
     let content=document.getElementById("subContent")
     data.map((item)=>{
@@ -98,9 +121,9 @@ function renderCloSystems(data,stationId) {
         systemItem.innerHTML=CloSystem(item,language)
         content.appendChild(systemItem)
 
-        makeProgressBar(250,0,10,item.waterLevel,".levelProgress-"+item.processingSystemID)
-        makeProgressBar(250,0,100,item.chlorineConcentration,".cloConcentrationProgress-"+item.processingSystemID)
-        makeProgressBar(250,0,100,item.waterPressure,".pressureProgress-"+item.processingSystemID)
+        makeProgressBar(250,0,10,item.waterLevel,".levelProgress-"+item.processingSystemID,'m')
+        makeProgressBar(250,0,100,item.chlorineConcentration,".cloConcentrationProgress-"+item.processingSystemID,'%')
+        makeProgressBar(250,0,100,item.waterPressure,".pressureProgress-"+item.processingSystemID,'pa')
         
         systemItem.querySelector('#showHistory').onclick=()=>{
             renderHistoryTable(item.chlorineInjections,item.processingSystemName,stationId)
@@ -158,27 +181,6 @@ function createRowOfTable(data) {
     return row
 }
 
-function handleChangSelectedStation() {
-    let pumpStationList=document.getElementById('pumpStationList').childNodes
-    for (let i=0;i<pumpStationList.length;i++) {
-        let child=pumpStationList[i]
-
-        child.onclick=(e)=>{
-            stationTempId=e.target.id
-            document.querySelector('.selected').classList.remove('selected')
-            child.classList.add('selected')
-            clearInterval(loop)
-            renderValuesOfStation(stationTempId)   
-            loop=setInterval(()=>{
-                renderValuesOfStation(stationTempId)
-            },cycleTime)
-            if (screen.width <= 480) {
-                openClodeNav()
-            }
-        }
-    }
-}
-
 function renderValue(itemId,data) {
     let renderItem=document.createElement('span')
     renderItem.innerText=data
@@ -190,6 +192,8 @@ function renderValue(itemId,data) {
     itemBox.appendChild(renderItem)
 }
 
+
+//App and handle app event 
 function handleLogOut(lang) {
     document.querySelector('.navigation').remove()
     document.querySelector('.content').remove()
@@ -241,7 +245,7 @@ function openClodeNav() {
         openCloseBtn.classList.add('open')
         openCloseBtn.classList.remove('fa-chevron-left')
         openCloseBtn.classList.add('fa-chevron-right')
-        navigation.style.marginLeft = "-400px"
+        navigation.style.marginLeft = "-420px"
         content.style.visibility = "visible"
     }
 
@@ -250,13 +254,16 @@ function openClodeNav() {
 function App(lang) {
 
     return `
-    <div>
+    <div style="height:100%">
         ${Header(lang)}
-        ${Navigation()}
+        <div class="body">
+            ${Navigation()}
 
-        <div class="content" id="content">
-            
+            <div class="content" id="content">
+            </div>
         </div>
+        ${Footer()}
     </div>
+    
     `
 }
