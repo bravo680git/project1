@@ -32,8 +32,13 @@ export const en={
     len:"Water level ",
     pres:"Pressure ",
     cloConcen:"Chlorine concentration ",
+<<<<<<< HEAD
     cloHist:"Chlorine injection list",
     tableTime:"Time",
+=======
+    cloHist:"Clo pouring history list",
+    tableTime:"Date",
+>>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
     tableEmp:"Staff",
     tableCloAmount:"Amount of Chlorine",
     addFormTitle:"Chlorine injection",

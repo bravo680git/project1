@@ -15,6 +15,7 @@ body {
     width: $screenWidth;
     font-family: Arial, Helvetica, sans-serif;
     height: 100%;
+<<<<<<< HEAD
 }
 
 @keyframes loadingSpin {
@@ -47,6 +48,8 @@ body {
         left: 50%;
         animation: loadingSpin 1.5s infinite;
     }
+=======
+>>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
 }
 //-------------------------------------------------------------------------------------------------------------
 //---------------------Header------------------------------------------------------------------------------------
@@ -127,9 +130,14 @@ body {
         padding-top: 5px;
         width: 25%;
         float: left;
+<<<<<<< HEAD
         min-height: 500px;
         background-color: $secondColor;
 
+=======
+        min-height: 420px;
+        background-color: $secondColor;
+>>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
         ul {
             list-style: none;
             li {
@@ -144,7 +152,11 @@ body {
         }
     
         .selected {
+<<<<<<< HEAD
             background-color: $firstColor
+=======
+            background-color: $thirthColor;
+>>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
         }
     
         .open {
@@ -163,7 +175,11 @@ body {
         $marginLeft: 30px;
     
         .cloSystem {
+<<<<<<< HEAD
             background-color: $thirthColor;
+=======
+            background-color: rgba(53, 10, 153, 0.637);
+>>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
             width: 290px;
             height: 312px;
             display: inline-block;
@@ -176,12 +192,20 @@ body {
                 font-size: 120%;
                 font-weight: 600;
                 margin-top: -10px;
+<<<<<<< HEAD
                 color: black;
+=======
+                color: white;
+>>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
             }
     
             .level, .pressure, .clo-concentration {
                 margin-bottom: 10px;
+<<<<<<< HEAD
                 color: black;
+=======
+                color: white;
+>>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
     
                 & > div {
                     margin-left: -5px;
@@ -190,6 +214,7 @@ body {
             }
     
             .clo-pour-history {
+<<<<<<< HEAD
                 height: 36px;
                 line-height: 40px;
                 width: 200px;
@@ -202,6 +227,23 @@ body {
                 &:hover {
                     background-color: rgb(2, 2, 56);
                     color: white;
+=======
+                background-color: blueviolet;
+                width: 200px;
+                text-align: center;
+                border-radius: 10px;
+                height: 30px;
+                line-height: 20px;
+                color: white;
+                font-weight: 500;
+                font-size: 90%;
+                margin: 0 auto;
+                padding: 5px 0;
+                border: 1px solid black;
+    
+                &:hover {
+                    background-color: $thirthColor;
+>>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
                     cursor: pointer;
                 }
             }
@@ -319,7 +361,11 @@ footer {
 
     .body {
         .navigation {
+<<<<<<< HEAD
             margin-left: -600px;
+=======
+            margin-left: -420px;
+>>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
             width: 100%;
             position: relative;
             height: 800px;

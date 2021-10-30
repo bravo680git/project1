@@ -9,6 +9,7 @@ body {
   width: 100vw;
   font-family: Arial, Helvetica, sans-serif;
   height: 100%;
+<<<<<<< HEAD
 }
 
 @keyframes loadingSpin {
@@ -41,6 +42,8 @@ body {
   top: 50%;
   left: 50%;
   animation: loadingSpin 1.5s infinite;
+=======
+>>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
 }
 
 .header {
@@ -117,8 +120,13 @@ body {
   padding-top: 5px;
   width: 25%;
   float: left;
+<<<<<<< HEAD
   min-height: 500px;
   background-color: #2e85c7;
+=======
+  min-height: 420px;
+  background-color: #047d9b;
+>>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
 }
 
 .body .navigation ul {
@@ -137,7 +145,11 @@ body {
 }
 
 .body .navigation .selected {
+<<<<<<< HEAD
   background-color: #253c86;
+=======
+  background-color: #06067c;
+>>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
 }
 
 .body .navigation .open {
@@ -153,7 +165,11 @@ body {
 }
 
 .body .content .cloSystem {
+<<<<<<< HEAD
   background-color: #ccc;
+=======
+  background-color: rgba(53, 10, 153, 0.637);
+>>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
   width: 290px;
   height: 312px;
   display: inline-block;
@@ -181,8 +197,12 @@ body {
 }
 
 .body .content .cloSystem .clo-pour-history {
+<<<<<<< HEAD
   height: 36px;
   line-height: 40px;
+=======
+  background-color: blueviolet;
+>>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
   width: 200px;
   text-align: center;
   border-bottom: 1px solid blue;
@@ -192,8 +212,12 @@ body {
 }
 
 .body .content .cloSystem .clo-pour-history:hover {
+<<<<<<< HEAD
   background-color: #020238;
   color: white;
+=======
+  background-color: #06067c;
+>>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
   cursor: pointer;
 }
 
@@ -229,13 +253,21 @@ body {
 }
 
 .body .content #cloPourHistory table .tableTitle th {
+<<<<<<< HEAD
   background-color: #253c86;
+=======
+  background-color: #06067c;
+>>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
   padding: 5px;
   width: 250px;
 }
 
 .body .content #cloPourHistory table .tableContent th {
+<<<<<<< HEAD
   background-color: #2e85c7;
+=======
+  background-color: #047d9b;
+>>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
   padding: 5px;
 }
 
@@ -266,7 +298,11 @@ footer {
   line-height: 30px;
 }
 
+<<<<<<< HEAD
 @media (max-width: 730px) {
+=======
+@media (max-width: 480px) {
+>>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
   .header .logo {
     width: 80px;
     height: 80px;
@@ -289,7 +325,11 @@ footer {
     right: 50px;
   }
   .body .navigation {
+<<<<<<< HEAD
     margin-left: -600px;
+=======
+    margin-left: -420px;
+>>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
     width: 100%;
     position: relative;
     height: 800px;
