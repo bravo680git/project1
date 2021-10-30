@@ -2,10 +2,9 @@ import {loadLoginForm,logIn} from './login.js'
 import {loadingApp,renderData} from './app.js'
 import {vi,en} from './lang.js'
 
-mainOperate()
  
-//Define function
-function mainOperate() {
+
+(function mainOperate() {
     start()
     .then(()=>{
         return new Promise(resolve =>{
@@ -14,8 +13,9 @@ function mainOperate() {
         })
     })
     .then(renderData)
-}
+}) ()
 
+//Define function
 function start(lang = en) {
     let isLogin = sessionStorage.getItem('isLogin')
 
@@ -36,4 +36,3 @@ function handleClickBtn(btnInfo,event) {
     let myBtn= document.querySelector(btnInfo)
     myBtn.onclick=event
 }
-

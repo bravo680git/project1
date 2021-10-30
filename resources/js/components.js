@@ -3,8 +3,7 @@
 export function Header(lang) {
 
     return `
-    <div class="header">
-     <header>
+    <div class="header"> 
          <div>
              <img class="logo" src="./resources/images/logo_sistech.jpg" alt="logo">
          </div>
@@ -21,8 +20,15 @@ export function Header(lang) {
              </div>
              ${lang.logOut}
          </div>    
-     </header>
     </div>
+    `
+}
+
+export function Footer() {
+    return `
+    <footer>
+        <div>&copy;2021 by Bravo680</div>
+    </footer>
     `
 }
 

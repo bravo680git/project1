@@ -1,7 +1,7 @@
 $fontSize: 20px;
-$firstColor: rgb(6, 6, 124);
-$secondColor: #047d9b;
-$thirthColor: rgb(6, 6, 124);
+$firstColor: #253c86;
+$secondColor: #2e85c7;
+$thirthColor:#ccc;
 $screenWidth: 100vw;
 
 * {
@@ -14,6 +14,39 @@ body {
     font-size: $fontSize;
     width: $screenWidth;
     font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
+}
+
+@keyframes loadingSpin {
+    form {
+        transform: rotate(240deg);
+    }
+    to {
+        transform: rotate(720deg);
+    }
+}
+
+.loading {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.08);
+    z-index: 9999;
+    visibility: hidden;
+
+    div {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        border: 5px solid #0daefb;
+        border-right:5px solid transparent;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        animation: loadingSpin 1.5s infinite;
+    }
 }
 //-------------------------------------------------------------------------------------------------------------
 //---------------------Header------------------------------------------------------------------------------------
@@ -34,7 +67,9 @@ body {
     .title {
         display: inline-block;
         line-height: 160px;
-        margin-left: 180px;
+        height: 160px;
+        width: 60%;
+        text-align: center;
         font-size: 150%;
         font-weight: 700;
         color: white;
@@ -79,166 +114,182 @@ body {
     }
 }
 
-//-------------------------------------------------------------------------------------------------------------
-//-----------------------------Navigation-------------------------------------------------------------------------
-.navigation {
-    padding-top: 5px;
-    width: 25%;
-    float: left;
-    min-height: 550px;
-    background-color: $secondColor;
-    ul {
-        list-style: none;
-        li {
-            padding: 10px 40px;  
-            color: white;
-            font-weight: 600;
-            &:hover {
-                cursor: pointer;
-                background-color: $firstColor;
-            }
-        }
-    }
+//--------------------------------------------------------------------------------------------
+//---------------------Body----------------------------------------------------------------------------------
+.body {
+    min-height: 420px;
+    background-size: cover;
+    height: fit-content;
 
-    .selected {
-        background-color: $thirthColor;
-    }
+    //-------------------------------------------------------------------------------------------------------------
+    //-----------------------------Navigation-------------------------------------------------------------------------
+    .navigation {
+        padding-top: 5px;
+        width: 25%;
+        float: left;
+        min-height: 500px;
+        background-color: $secondColor;
 
-    .open {
-        visibility: hidden;
-    }
-}
-
-//-------------------------------------------------------------------------------------------------------------
-//--------------------------Content----------------------------------------------------------------------------
-.content {
-    float: left;
-    width: 75%;
-    margin-top: 20px;
-    padding-left: 30px;
-    position: relative;
-    $marginLeft: 30px;
-
-    .cloSystem {
-        background-color: rgba(53, 10, 153, 0.637);
-        width: 290px;
-        height: 312px;
-        display: inline-block;
-        border-radius: 20px;
-        padding: 20px;
-        margin: 5px;
-
-        .title {
-            text-align: center;
-            font-size: 120%;
-            font-weight: 600;
-            margin-top: -10px;
-            color: white;
-        }
-
-        .level, .pressure, .clo-concentration {
-            margin-bottom: 10px;
-            color: white;
-
-            & > div {
-                margin-left: -5px;
-                color: black;
-            }
-        }
-
-        .clo-pour-history {
-            background-color: blueviolet;
-            width: 200px;
-            text-align: center;
-            border-radius: 10px;
-            height: 30px;
-            line-height: 20px;
-            color: white;
-            font-weight: 500;
-            font-size: 90%;
-            margin: 0 auto;
-            padding: 5px 0;
-            border: 1px solid black;
-
-            &:hover {
-                background-color: $thirthColor;
-                cursor: pointer;
-            }
-        }
-    }    
-
-    .return {
-        font-size: 200%;
-        font-weight: 800;
-        opacity: 0.6;
-        position: absolute;
-        left: 5px;
-        top: -20px;
-
-        &:hover {
-            cursor: pointer;
-            opacity: 1;
-        }
-    }
-
-    #systemName {
-        text-align: center;
-        font-size: 120%;
-        font-weight: 500;
-    }
-
-    #cloPourHistory {
-        position: relative;
-
-        table {
-            margin-top: 20px;
-            border: 2px solid black;
-            color: white;
-            width: 96%;
-            
-            .tableTitle {
-                th {
-                    background-color: $firstColor;
-                    padding: 5px;
-                    width: 250px;
-                }
-            }
-
-            .tableContent {
-                th {
-                    background-color: $secondColor;
-                    padding: 5px;
-                }
-            }
-        
-        }
-
-        #add-history {
-            position: absolute;
-            top: 0px;
-            left: 90%;
-
-            button {
-                width: 25px;
-                height: 25px;
-                font-size: 100%;
-                border-radius: 50%;
-                border: 2px solid black;
-
+        ul {
+            list-style: none;
+            li {
+                padding: 10px 40px;  
+                color: white;
+                font-weight: 600;
                 &:hover {
                     cursor: pointer;
-                    transform: scale(1.1);
-                    box-shadow: 0px 2px 3px black;
+                    background-color: $firstColor;
+                }
+            }
+        }
+    
+        .selected {
+            background-color: $firstColor
+        }
+    
+        .open {
+            visibility: hidden;
+        }
+    }
+    
+    //-------------------------------------------------------------------------------------------------------------
+    //--------------------------Content----------------------------------------------------------------------------
+    .content {
+        float: left;
+        width: 75%;
+        margin-top: 20px;
+        padding-left: 30px;
+        position: relative;
+        $marginLeft: 30px;
+    
+        .cloSystem {
+            background-color: $thirthColor;
+            width: 290px;
+            height: 312px;
+            display: inline-block;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 5px;
+    
+            .title {
+                text-align: center;
+                font-size: 120%;
+                font-weight: 600;
+                margin-top: -10px;
+                color: black;
+            }
+    
+            .level, .pressure, .clo-concentration {
+                margin-bottom: 10px;
+                color: black;
+    
+                & > div {
+                    margin-left: -5px;
+                    color: black;
+                }
+            }
+    
+            .clo-pour-history {
+                height: 36px;
+                line-height: 40px;
+                width: 200px;
+                text-align: center;
+                border-bottom: 1px solid blue;
+                font-weight: 500;
+                font-size: 90%;
+                margin: 0 auto;
+    
+                &:hover {
+                    background-color: rgb(2, 2, 56);
+                    color: white;
+                    cursor: pointer;
+                }
+            }
+        }    
+    
+        .return {
+            font-size: 200%;
+            font-weight: 800;
+            opacity: 0.6;
+            position: absolute;
+            left: 5px;
+            top: -20px;
+    
+            &:hover {
+                cursor: pointer;
+                opacity: 1;
+            }
+        }
+    
+        #systemName {
+            text-align: center;
+            font-size: 120%;
+            font-weight: 500;
+        }
+    
+        #cloPourHistory {
+            position: relative;
+    
+            table {
+                margin-top: 20px;
+                border: 2px solid black;
+                color: white;
+                width: 96%;
+                
+                .tableTitle {
+                    th {
+                        background-color: $firstColor;
+                        padding: 5px;
+                        width: 250px;
+                    }
+                }
+    
+                .tableContent {
+                    th {
+                        background-color: $secondColor;
+                        padding: 5px;
+                    }
+                }
+            
+            }
+    
+            #add-history {
+                position: absolute;
+                top: 0px;
+                left: 90%;
+    
+                button {
+                    width: 25px;
+                    height: 25px;
+                    font-size: 100%;
+                    border-radius: 50%;
+                    border: 2px solid black;
+    
+                    &:hover {
+                        cursor: pointer;
+                        transform: scale(1.1);
+                        box-shadow: 0px 2px 3px black;
+                    }
                 }
             }
         }
     }
 }
+
+//-------------------------------------------------------------------------------------------------------
+//--------------------Footer---------------------------------------------------------------
+footer {
+    background-color: #ccc;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+}
+
 
 //-----------------------------------------------------------------------------------------
 //-------------------------Repsponsive----------------------------------------
 //---------------------------------------------------------------------------------------------
-@media (max-width:480px) {
+@media (max-width:730px) {
     .header {
         .logo {
             width: 80px;
@@ -250,6 +301,7 @@ body {
             font-size: 100%;
             margin-left: 20px;
             line-height: 0;
+            width: 90%;
         }
 
         .register {
@@ -265,40 +317,43 @@ body {
         }
     }
 
-    .navigation {
-        margin-left: -400px;
-        width: 100%;
-        position: relative;
-
-        .open {
-            visibility: visible;
-            position: fixed;
-            left: 0px;
-            top: 400px;
-            font-size: 200%;
-            opacity: 0.6;
-            z-index: 999;
-
-            &:hover {
-                opacity: 1;
+    .body {
+        .navigation {
+            margin-left: -600px;
+            width: 100%;
+            position: relative;
+            height: 800px;
+    
+            .open {
+                visibility: visible;
+                position: fixed;
+                left: 0px;
+                top: 400px;
+                font-size: 200%;
+                opacity: 0.6;
+                z-index: 999;
+    
+                &:hover {
+                    opacity: 1;
+                }
+            }
+    
+            .close {
+                position: fixed;
+                top: 400px;
+                right: 10px;
+                font-size: 200%;
+                opacity: 0.6;
+    
+                &:hover {
+                    opacity: 1;
+                }
             }
         }
-
-        .close {
-            position: fixed;
-            top: 400px;
-            right: 10px;
-            font-size: 200%;
-            opacity: 0.6;
-
-            &:hover {
-                opacity: 1;
-            }
+    
+        .content {
+            width: 100%;
         }
-    }
-
-    .content {
-        width: 100%;
     }
 
 }

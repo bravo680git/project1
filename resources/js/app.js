@@ -1,25 +1,20 @@
 import { vi,en } from "./lang.js"
 import { logOut } from "./login.js"
 import { loadAddForm } from "./addCloPourHis.js"
-import {Header,Navigation,SystemValue,CloSystem} from './components.js'
+import {Header,Navigation,SystemValue,CloSystem,Footer} from './components.js'
 import {makeProgressBar} from './progressBar.js'
 
 let loop
 let cycleTime=10000000
 let stationTempId
-let language=en
-if (localStorage.getItem('language')=='en') {
-    language=en
-}
-else {
-    language=vi
-}
+let language=localStorage.getItem('language')=='vi'?vi:en
 
 
 export function loadingApp() {  
     let root=document.getElementById('main')
     let myApp=document.createElement('div')
     myApp.innerHTML=App(language)
+    myApp.style.height="100%"
     root.appendChild(myApp)
 
     document.getElementById('open-close-btn').onclick=openClodeNav
@@ -36,20 +31,24 @@ export function loadingApp() {
 
 } 
 
+
+//Render data to app
 export function renderData() {
-    fetch('../fakeData.json')
+    startOrStopLoadingAnimation(true)
+    fetch('https://water-test-training.herokuapp.com/stations/list')
         .then(response=>response.json())
         .then(data=>{
+            startOrStopLoadingAnimation(false)
             renderList(data)
             clearInterval(loop)
-            renderValuesOfStation(1)
+            renderValuesOfStation(data[0].stationID,true)
             loop=setInterval(()=>{
-                renderValuesOfStation(1)
+                renderValuesOfStation(data[0].stationID,false)
             },cycleTime)
             handleChangSelectedStation()
         })        
 }
-
+    //list of stations
 function renderList(data) {
     let listBox = document.getElementById('pumpStationList')
     data.map(item => {
@@ -62,11 +61,33 @@ function renderList(data) {
     handleChangSelectedStation()
 }
 
-function renderValuesOfStation(stationId) {
-    fetch("../fakeData" + stationId + ".json")
+function handleChangSelectedStation() {
+    let pumpStationList=document.getElementById('pumpStationList').childNodes
+    for (let i=0;i<pumpStationList.length;i++) {
+        let child=pumpStationList[i]
+
+        child.onclick=(e)=>{
+            stationTempId=e.target.id
+            document.querySelector('.selected').classList.remove('selected')
+            child.classList.add('selected')
+            clearInterval(loop)
+            renderValuesOfStation(stationTempId,true)   
+            loop=setInterval(()=>{
+                renderValuesOfStation(stationTempId,false)
+            },cycleTime)
+            if (screen.width <= 480) {
+                openClodeNav()
+            }
+        }
+    }
+}
+
+function renderValuesOfStation(stationId,enable) {
+    startOrStopLoadingAnimation(true,enable)
+    fetch("https://water-test-training.herokuapp.com/stations/" + stationId + "/details")
         .then(resopnse => resopnse.json())
         .then(data => {
-
+            startOrStopLoadingAnimation(false)
             if (document.getElementById('subContent')) {
                 document.getElementById('subContent').remove()
             }
@@ -76,10 +97,12 @@ function renderValuesOfStation(stationId) {
             content.id = "subContent"
             content.innerHTML = `
             <div id="location">${language.loca}
-                    </div>
-                    <div id="time">
-                        ${language.time}
-                    </div>
+            </div>
+            <!--
+            <div id="time">
+                ${language.time}
+            </div>
+            -->
             `
             contentBox.appendChild(content)
 
@@ -87,8 +110,7 @@ function renderValuesOfStation(stationId) {
             renderCloSystems(data[0].processingSystems, stationId)
         })
 }
-
-//Dữ liệu cac hệ thống châm clo của 1 trạm bơm được đưa ra cac thẻ
+    //clo systems of a station
 function renderCloSystems(data,stationId) {
     let content=document.getElementById("subContent")
     data.map((item)=>{
@@ -98,9 +120,9 @@ function renderCloSystems(data,stationId) {
         systemItem.innerHTML=CloSystem(item,language)
         content.appendChild(systemItem)
 
-        makeProgressBar(250,0,10,item.waterLevel,".levelProgress-"+item.processingSystemID)
-        makeProgressBar(250,0,100,item.chlorineConcentration,".cloConcentrationProgress-"+item.processingSystemID)
-        makeProgressBar(250,0,100,item.waterPressure,".pressureProgress-"+item.processingSystemID)
+        makeProgressBar(250,0,10,item.waterLevel,".levelProgress-"+item.processingSystemID,'m')
+        makeProgressBar(250,0,100,item.chlorineConcentration,".cloConcentrationProgress-"+item.processingSystemID,'%')
+        makeProgressBar(250,0,100,item.waterPressure,".pressureProgress-"+item.processingSystemID,'pa')
         
         systemItem.querySelector('#showHistory').onclick=()=>{
             renderHistoryTable(item.chlorineInjections,item.processingSystemName,stationId)
@@ -112,7 +134,7 @@ function renderCloSystems(data,stationId) {
 }
 
 function renderHistoryTable(data,systemName,stationId) {
-
+    
     if (document.getElementById('subContent')) {
         document.getElementById('subContent').remove()
     }
@@ -124,17 +146,19 @@ function renderHistoryTable(data,systemName,stationId) {
     contentBox.appendChild(systemValuePage)
 
     document.getElementById('add-history').onclick=()=>{
-        loadAddForm(language)
+        loadAddForm(language,data[0].processingSystemID)
     }
 
     document.getElementById('return').onclick=()=>{
         clearInterval(loop)
-        renderValuesOfStation(stationId)
+        renderValuesOfStation(stationId,true)
         loop=setInterval(()=>{
-            renderValuesOfStation(stationId)
+            renderValuesOfStation(stationId,false)
         },cycleTime)
         if (screen.width<=480) {
-            document.getElementById('open-close-btn').style.visibility="visible"
+            setTimeout(()=>{
+                document.getElementById('open-close-btn').style.visibility="visible"
+            },500)
         } 
     }
 
@@ -150,33 +174,13 @@ function renderHistoryTable(data,systemName,stationId) {
 function createRowOfTable(data) {
     let row = document.createElement('tr')
     row.classList.add('tableContent')
+    let time=new Date(data.injectionTime)
     row.innerHTML = `
-        <th>${data.injectionTime}</th>
+        <th>${time.toUTCString()}</th>
         <th>${data.employeeName}</th>
         <th>${data.chlorineVolume}</th>
         `
     return row
-}
-
-function handleChangSelectedStation() {
-    let pumpStationList=document.getElementById('pumpStationList').childNodes
-    for (let i=0;i<pumpStationList.length;i++) {
-        let child=pumpStationList[i]
-
-        child.onclick=(e)=>{
-            stationTempId=e.target.id
-            document.querySelector('.selected').classList.remove('selected')
-            child.classList.add('selected')
-            clearInterval(loop)
-            renderValuesOfStation(stationTempId)   
-            loop=setInterval(()=>{
-                renderValuesOfStation(stationTempId)
-            },cycleTime)
-            if (screen.width <= 480) {
-                openClodeNav()
-            }
-        }
-    }
 }
 
 function renderValue(itemId,data) {
@@ -190,6 +194,8 @@ function renderValue(itemId,data) {
     itemBox.appendChild(renderItem)
 }
 
+
+//App and handle app event 
 function handleLogOut(lang) {
     document.querySelector('.navigation').remove()
     document.querySelector('.content').remove()
@@ -205,7 +211,7 @@ function handleLogOut(lang) {
                 </div>
                 ${lang.logIn}
         `
-    document.getElementsByTagName('header')[0].appendChild(newRegisterBtn)
+    document.querySelector('.header').appendChild(newRegisterBtn)
     clearInterval(loop)
 }
 
@@ -241,22 +247,36 @@ function openClodeNav() {
         openCloseBtn.classList.add('open')
         openCloseBtn.classList.remove('fa-chevron-left')
         openCloseBtn.classList.add('fa-chevron-right')
-        navigation.style.marginLeft = "-400px"
+        navigation.style.marginLeft = "-600px"
         content.style.visibility = "visible"
     }
 
 }
 
+function startOrStopLoadingAnimation(run, enable = true) {
+    if (enable) {
+        let loadingAnimation = document.querySelector('.loading')
+        if (run) {
+            loadingAnimation.style.visibility = "visible"
+        }
+        else {
+            loadingAnimation.style.visibility = "hidden"
+        }
+    }
+}
+
 function App(lang) {
 
     return `
-    <div>
+    <div style="height:100%">
         ${Header(lang)}
-        ${Navigation()}
+        <div class="body">
+            ${Navigation()}
 
-        <div class="content" id="content">
-            
+            <div class="content" id="content">
+            </div>
         </div>
     </div>
+    
     `
 }
