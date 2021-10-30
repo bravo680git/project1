@@ -34,25 +34,16 @@ export function loadingApp() {
 
 //Render data to app
 export function renderData() {
-<<<<<<< HEAD
     startOrStopLoadingAnimation(true)
-=======
->>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
     fetch('https://water-test-training.herokuapp.com/stations/list')
         .then(response=>response.json())
         .then(data=>{
             startOrStopLoadingAnimation(false)
             renderList(data)
             clearInterval(loop)
-<<<<<<< HEAD
             renderValuesOfStation(data[0].stationID,true)
             loop=setInterval(()=>{
                 renderValuesOfStation(data[0].stationID,false)
-=======
-            renderValuesOfStation(data[0].stationID)
-            loop=setInterval(()=>{
-                renderValuesOfStation(data[0].stationID)
->>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
             },cycleTime)
             handleChangSelectedStation()
         })        
@@ -80,15 +71,9 @@ function handleChangSelectedStation() {
             document.querySelector('.selected').classList.remove('selected')
             child.classList.add('selected')
             clearInterval(loop)
-<<<<<<< HEAD
             renderValuesOfStation(stationTempId,true)   
             loop=setInterval(()=>{
                 renderValuesOfStation(stationTempId,false)
-=======
-            renderValuesOfStation(stationTempId)   
-            loop=setInterval(()=>{
-                renderValuesOfStation(stationTempId)
->>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
             },cycleTime)
             if (screen.width <= 480) {
                 openClodeNav()
@@ -97,12 +82,8 @@ function handleChangSelectedStation() {
     }
 }
 
-<<<<<<< HEAD
 function renderValuesOfStation(stationId,enable) {
     startOrStopLoadingAnimation(true,enable)
-=======
-function renderValuesOfStation(stationId) {
->>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
     fetch("https://water-test-training.herokuapp.com/stations/" + stationId + "/details")
         .then(resopnse => resopnse.json())
         .then(data => {
@@ -117,17 +98,11 @@ function renderValuesOfStation(stationId) {
             content.innerHTML = `
             <div id="location">${language.loca}
             </div>
-<<<<<<< HEAD
             <!--
             <div id="time">
                 ${language.time}
             </div>
             -->
-=======
-            <div id="time">
-                ${language.time}
-            </div>
->>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
             `
             contentBox.appendChild(content)
 
@@ -272,11 +247,7 @@ function openClodeNav() {
         openCloseBtn.classList.add('open')
         openCloseBtn.classList.remove('fa-chevron-left')
         openCloseBtn.classList.add('fa-chevron-right')
-<<<<<<< HEAD
         navigation.style.marginLeft = "-600px"
-=======
-        navigation.style.marginLeft = "-420px"
->>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
         content.style.visibility = "visible"
     }
 
