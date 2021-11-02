@@ -3,7 +3,6 @@ import {loadingApp,renderData} from './app.js'
 import {vi,en} from './lang.js'
 
  
-
 (function mainOperate() {
     start()
     .then(()=>{
@@ -25,14 +24,9 @@ function start(lang = en) {
         }
         else {
             loadLoginForm(lang)
-            handleClickBtn('.submit-btn', () => {
+            document.querySelector('.submit-btn').onclick =()=>{
                 logIn(resolve)
-            })
+            }
         }
     })
-}
-
-function handleClickBtn(btnInfo,event) {
-    let myBtn= document.querySelector(btnInfo)
-    myBtn.onclick=event
 }

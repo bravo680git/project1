@@ -1,6 +1,6 @@
 
 
-export function Header(lang) {
+function Header(lang) {
 
     return `
     <div class="header"> 
@@ -24,35 +24,62 @@ export function Header(lang) {
     `
 }
 
-export function Footer() {
+function Footer() {
     return `
     <footer>
-        <div>&copy;2021 by Bravo680</div>
+        <div class="name">Trung tâm nghiên cứu và đào tạo tự động hóa Sistrain</div>
+        <div class="follow">
+        <div>
+            <a href="http://www.sistrain.com" target="blank" >
+            <i class="fas fa-globe"></i></a>
+        </div>    
+        <div>
+            <a href="https://www.youtube.com/channel/UCZlv_mk1VFnno-I3ciZO-ng"target="blank" >
+            <i class="fab fa-youtube-square"></i></a>
+        </div>
+        <div>
+            <a href="https://www.facebook.com/SistrainCenter"target="blank" >
+            <i class="fab fa-facebook-square"></i></a>
+        </div>
+        </div>
+        <div class="contact">
+            <div>
+                <i class="fas fa-location-arrow"></i>
+                367/2 Hòa Hảo, P.5, Q.10, TP Hồ Chí Minh
+            </div>
+            <div><i class="fas fa-envelope-square"></i>
+            sistrain@sistech.com.vn</div>
+            <div><i class="fas fa-phone-square"></i>093 411 18 41</div>
+        </div>
+        <div class="coppyright">Copyright &copy;2021 by Sistrain software development team</div>
     </footer>
     `
 }
 
-export function SystemValue(lang) {
+function SystemValue(lang) {
     return `
     <div class="return" id="return"><i class="fas fa-chevron-left"></i></div>
     <div id="systemName"></div>
     <div id="cloPourHistory">
         ${lang.cloHist}
         <table>
-            <tr class="tableTitle">
-                <th>${lang.tableTime}</th>
-                <th>${lang.tableEmp}</th>
-                <th>${lang.tableCloAmount}</th>
-            </tr>
+            <thead>
+                <tr class="tableTitle">
+                    <th>${lang.tableTime}</th>
+                    <th>${lang.tableEmp}</th>
+                    <th>${lang.tableCloAmount}</th>
+                </tr>
+            </thead>
         </table>
+    <!--
     <div id="add-history">
         <button title="Thêm nhật ký châm Clo"><i class="fas fa-plus"></i></button>
     </div>
-    
+    -->
     `
 }
 
-export function Navigation() {
+function Navigation() {
 
     return `
     <div class="navigation">
@@ -64,7 +91,7 @@ export function Navigation() {
     `
 }
 
-export function CloSystem(data,lang) {
+function CloSystem(data,lang) {
     return `
     <div >
         <div class="title">
@@ -72,17 +99,66 @@ export function CloSystem(data,lang) {
         </div>
         <div class="level">
             ${lang.len}
-            <div class="levelProgress-${data.processingSystemID}"></div>
+            <div class="levelProgress-${data.processingSystemId}"></div>
         </div>
         <div class="pressure">
             ${lang.pres}
-            <div class="pressureProgress-${data.processingSystemID}"></div>
+            <div class="pressureProgress-${data.processingSystemId}"></div>
         </div>
         <div class="clo-concentration">
             ${lang.cloConcen}
-            <div class="cloConcentrationProgress-${data.processingSystemID}"></div>
+            <div class="cloConcentrationProgress-${data.processingSystemId}"></div>
         </div>
         <div class="clo-pour-history" id="showHistory">${lang.cloHist}</div>
     </div>
     `
 }
+
+function LoginForm(lang) {
+    return `
+    <div class="login-box">
+        <div class="login-form">
+            <form >
+                <img class="login-logo" src="../resources/images/logo_sistech.jpg" alt="Sistech logo">
+                <div class="login-logo-label">${lang.mainTitle}</div>
+                <div class="form-input">
+                    <i class="fas fa-user-alt input-icon"></i>
+                    <input id="username" class="username" type="text" placeholder='${lang.username}'>
+                    <i class="fas fa-unlock input-icon"></i>
+                    <input id="password" class="password" type="password" placeholder='${lang.password}'>
+                </div>
+                    <div class="false-warming" id="error"></div>
+                    <button class="submit-btn" type="button">${lang.logIn}</button>
+            </form>
+        </div>    
+    </div>
+            `
+}
+
+function App(lang) {
+
+    return `
+    <div style="height:100%">
+        ${Header(lang)}
+        <div class="body clearfix">
+            ${Navigation()}
+
+            <div class="content" id="content">
+            </div>
+        </div>
+        ${Footer()}
+    </div>
+    
+    `
+}
+
+function Content() {
+
+    return `
+    <div id="location">
+    <i class="fas fa-map-marker-alt"></i>
+    </div>
+    `
+}
+
+export {App,SystemValue,Navigation,CloSystem,LoginForm,Content}

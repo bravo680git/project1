@@ -1,9 +1,11 @@
 
+export {vi,en}
 
-export const vi={
-    mainTitle:"Chương trình giám sát trạm bơm",
+const vi={
+    mainTitle:"Chương trình giám sát hệ thống xử lý nước",
     logIn:"Đăng nhập",
     logOut:"Đăng xuất",
+    messageToLogout:"Phiên đăng nhập đã hết hạn, vui lòng đăng nhập lại!",
     username:"Tài khoản",
     password:"Mật khẩu",
     loca:"Vị trí: ",
@@ -21,10 +23,11 @@ export const vi={
     save:"Lưu lại"
 }
 
-export const en={
-    mainTitle:"Pump station monitor program",
+const en={
+    mainTitle:"Water treatment monitoring program",
     logIn:"Log In",
     logOut:"Log out",
+    messageToLogout:"Login session has expired, please login again!",
     username:"Username",
     password:"Password",
     loca:"Location: ",
@@ -32,13 +35,8 @@ export const en={
     len:"Water level ",
     pres:"Pressure ",
     cloConcen:"Chlorine concentration ",
-<<<<<<< HEAD
     cloHist:"Chlorine injection list",
     tableTime:"Time",
-=======
-    cloHist:"Clo pouring history list",
-    tableTime:"Date",
->>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
     tableEmp:"Staff",
     tableCloAmount:"Amount of Chlorine",
     addFormTitle:"Chlorine injection",

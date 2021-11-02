@@ -1,7 +1,7 @@
 import { vi,en } from "./lang.js"
 import { logOut } from "./login.js"
 import { loadAddForm } from "./addCloPourHis.js"
-import {Header,Navigation,SystemValue,CloSystem,Footer} from './components.js'
+import {App,SystemValue,CloSystem,Content} from './components.js'
 import {makeProgressBar} from './progressBar.js'
 
 let loop
@@ -10,7 +10,7 @@ let stationTempId
 let language=localStorage.getItem('language')=='vi'?vi:en
 
 
-export function loadingApp() {  
+function loadingApp() {  
     let root=document.getElementById('main')
     let myApp=document.createElement('div')
     myApp.innerHTML=App(language)
@@ -31,19 +31,27 @@ export function loadingApp() {
 
 } 
 
-
 //Render data to app
-export function renderData() {
+function renderData() {
     startOrStopLoadingAnimation(true)
-    fetch('https://water-test-training.herokuapp.com/stations/list')
+
+    let fetchOption={
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Headers': '*',
+            'Authorization':`Bearer ${sessionStorage.getItem('loginToken')}`
+        }
+    }
+    fetch('https://sampleapiproject.azurewebsites.net/stations/list',fetchOption)
         .then(response=>response.json())
         .then(data=>{
             startOrStopLoadingAnimation(false)
             renderList(data)
             clearInterval(loop)
-            renderValuesOfStation(data[0].stationID,true)
+            renderValuesOfStation(data[0].stationId,true)
             loop=setInterval(()=>{
-                renderValuesOfStation(data[0].stationID,false)
+                renderValuesOfStation(data[0].stationId,false)
             },cycleTime)
             handleChangSelectedStation()
         })        
@@ -53,7 +61,7 @@ function renderList(data) {
     let listBox = document.getElementById('pumpStationList')
     data.map(item => {
         let stattionLi = document.createElement('li')
-        stattionLi.id=item.stationID
+        stattionLi.id=item.stationId
         stattionLi.innerText = item.stationName
         listBox.appendChild(stattionLi)
     })
@@ -84,10 +92,24 @@ function handleChangSelectedStation() {
 
 function renderValuesOfStation(stationId,enable) {
     startOrStopLoadingAnimation(true,enable)
-    fetch("https://water-test-training.herokuapp.com/stations/" + stationId + "/details")
+
+    let fetchOption={
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Headers': '*',
+            'Authorization':`Bearer ${sessionStorage.getItem('loginToken')}`
+        }
+    }
+    fetch("https://sampleapiproject.azurewebsites.net/stations/" + stationId + "/details",fetchOption)
         .then(resopnse => resopnse.json())
         .then(data => {
-            startOrStopLoadingAnimation(false)
+            valuesOfStation(data,stationId)
+        })
+}
+
+function valuesOfStation (data,stationId) {
+    startOrStopLoadingAnimation(false)
             if (document.getElementById('subContent')) {
                 document.getElementById('subContent').remove()
             }
@@ -95,34 +117,26 @@ function renderValuesOfStation(stationId,enable) {
             let contentBox = document.getElementById('content')
             let content = document.createElement('div')
             content.id = "subContent"
-            content.innerHTML = `
-            <div id="location">${language.loca}
-            </div>
-            <!--
-            <div id="time">
-                ${language.time}
-            </div>
-            -->
-            `
+            content.innerHTML = Content()
             contentBox.appendChild(content)
 
             renderValue("location", data[0].stationAddress)
             renderCloSystems(data[0].processingSystems, stationId)
-        })
 }
+
     //clo systems of a station
 function renderCloSystems(data,stationId) {
     let content=document.getElementById("subContent")
     data.map((item)=>{
         let systemItem=document.createElement('div')
-        systemItem.id="cloSystems"+item.processingSystemID
+        systemItem.id="cloSystems"+item.processingSystemId
         systemItem.classList.add('cloSystem')
         systemItem.innerHTML=CloSystem(item,language)
         content.appendChild(systemItem)
 
-        makeProgressBar(250,0,10,item.waterLevel,".levelProgress-"+item.processingSystemID,'m')
-        makeProgressBar(250,0,100,item.chlorineConcentration,".cloConcentrationProgress-"+item.processingSystemID,'%')
-        makeProgressBar(250,0,100,item.waterPressure,".pressureProgress-"+item.processingSystemID,'pa')
+        makeProgressBar(250,0,10,item.waterLevel,".levelProgress-"+item.processingSystemId,'m')
+        makeProgressBar(250,0,100,item.chlorineConcentration,".cloConcentrationProgress-"+item.processingSystemId,'%')
+        makeProgressBar(250,0,100,item.waterPressure,".pressureProgress-"+item.processingSystemId,'pa')
         
         systemItem.querySelector('#showHistory').onclick=()=>{
             renderHistoryTable(item.chlorineInjections,item.processingSystemName,stationId)
@@ -145,9 +159,9 @@ function renderHistoryTable(data,systemName,stationId) {
     systemValuePage.innerHTML=SystemValue(language)
     contentBox.appendChild(systemValuePage)
 
-    document.getElementById('add-history').onclick=()=>{
-        loadAddForm(language,data[0].processingSystemID)
-    }
+    // document.getElementById('add-history').onclick=()=>{
+    //     loadAddForm(language,data[0].processingSystemID)
+    // }
 
     document.getElementById('return').onclick=()=>{
         clearInterval(loop)
@@ -167,16 +181,16 @@ function renderHistoryTable(data,systemName,stationId) {
 
     data.map(rowData=>{
         let tableRow=createRowOfTable(rowData)
-        table.appendChild(tableRow)
-    })
+        table.insertBefore(tableRow,table.firstChild.nextSibling)
+    })  
 }
 
 function createRowOfTable(data) {
     let row = document.createElement('tr')
     row.classList.add('tableContent')
-    let time=new Date(data.injectionTime)
+    let time=new Date(data.injectionTime).toUTCString()
     row.innerHTML = `
-        <th>${time.toUTCString()}</th>
+        <th>${time.slice(4,25)}</th>
         <th>${data.employeeName}</th>
         <th>${data.chlorineVolume}</th>
         `
@@ -231,7 +245,6 @@ function changeLanguage() {
 function openClodeNav() {
     let openCloseBtn=document.getElementById('open-close-btn')
     let navigation = document.querySelector('.navigation ')
-    let content = document.querySelector('.content')
 
     window.scrollTo(0, 0)
     if (openCloseBtn.classList.contains('open')) {
@@ -239,16 +252,16 @@ function openClodeNav() {
         openCloseBtn.classList.add('close')
         openCloseBtn.classList.remove('fa-chevron-right')
         openCloseBtn.classList.add('fa-chevron-left')
-        navigation.style.marginLeft = "0"
-        content.style.visibility = "hidden"
+        navigation.style.visibility = "visible"
+        document.body.style.overflow="hidden"
     }
     else {
         openCloseBtn.classList.remove('close')
         openCloseBtn.classList.add('open')
         openCloseBtn.classList.remove('fa-chevron-left')
         openCloseBtn.classList.add('fa-chevron-right')
-        navigation.style.marginLeft = "-600px"
-        content.style.visibility = "visible"
+        navigation.style.visibility = "hidden"
+        document.body.style.overflow="scroll"
     }
 
 }
@@ -265,19 +278,4 @@ function startOrStopLoadingAnimation(run, enable = true) {
     }
 }
 
-function App(lang) {
-
-    return `
-    <div style="height:100%">
-        ${Header(lang)}
-        <div class="body">
-            ${Navigation()}
-
-            <div class="content" id="content">
-            </div>
-        </div>
-        ${Footer()}
-    </div>
-    
-    `
-}
+export {loadingApp,renderData,startOrStopLoadingAnimation}

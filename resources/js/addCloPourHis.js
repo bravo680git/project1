@@ -1,5 +1,7 @@
 
-export function loadAddForm(lang,processId) {
+export {loadAddForm,removeForm}
+
+function loadAddForm(lang,processId) {
     let root=document.getElementById('main')
     let myForm=document.createElement('div')
     myForm.id="Form-added"
@@ -45,7 +47,7 @@ function saveHistory(data) {
     .catch(error=>alert(error))
 }
 
-export function removeForm() {
+function removeForm() {
     let root=document.getElementById('main')
     let myForm=document.getElementById('Form-added')
     root.removeChild(myForm)

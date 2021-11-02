@@ -4,12 +4,11 @@
   box-sizing: border-box;
 }
 
-body {
+html, body {
   font-size: 20px;
   width: 100vw;
   font-family: Arial, Helvetica, sans-serif;
   height: 100%;
-<<<<<<< HEAD
 }
 
 @keyframes loadingSpin {
@@ -42,8 +41,12 @@ body {
   top: 50%;
   left: 50%;
   animation: loadingSpin 1.5s infinite;
-=======
->>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: block;
 }
 
 .header {
@@ -113,20 +116,17 @@ body {
 .body {
   min-height: 420px;
   background-size: cover;
-  height: fit-content;
+  min-height: calc(100% - 160px);
 }
 
 .body .navigation {
   padding-top: 5px;
-  width: 25%;
+  width: 240px;
   float: left;
-<<<<<<< HEAD
   min-height: 500px;
-  background-color: #2e85c7;
-=======
-  min-height: 420px;
-  background-color: #047d9b;
->>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
+  border: 5px solid;
+  border-style: groove;
+  margin: 5px 0 0 5px;
 }
 
 .body .navigation ul {
@@ -134,22 +134,23 @@ body {
 }
 
 .body .navigation ul li {
-  padding: 10px 40px;
-  color: white;
+  padding: 15px 15px;
+  color: black;
+  background-color: #2e85c791;
   font-weight: 600;
+  margin: 5px;
+  box-shadow: 2px 2px 4px;
 }
 
 .body .navigation ul li:hover {
   cursor: pointer;
   background-color: #253c86;
+  color: white;
 }
 
 .body .navigation .selected {
-<<<<<<< HEAD
   background-color: #253c86;
-=======
-  background-color: #06067c;
->>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
+  color: white;
 }
 
 .body .navigation .open {
@@ -158,24 +159,30 @@ body {
 
 .body .content {
   float: left;
-  width: 75%;
   margin-top: 20px;
   padding-left: 30px;
   position: relative;
 }
 
+.body .content #location {
+  font-size: 130%;
+}
+
+.body .content #location i {
+  font-size: 150%;
+  padding: 5px;
+  color: #253c86;
+}
+
 .body .content .cloSystem {
-<<<<<<< HEAD
   background-color: #ccc;
-=======
-  background-color: rgba(53, 10, 153, 0.637);
->>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
   width: 290px;
   height: 312px;
   display: inline-block;
   border-radius: 20px;
   padding: 20px;
   margin: 5px;
+  box-shadow: 2px 2px 4px;
 }
 
 .body .content .cloSystem .title {
@@ -197,12 +204,8 @@ body {
 }
 
 .body .content .cloSystem .clo-pour-history {
-<<<<<<< HEAD
   height: 36px;
   line-height: 40px;
-=======
-  background-color: blueviolet;
->>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
   width: 200px;
   text-align: center;
   border-bottom: 1px solid blue;
@@ -212,12 +215,8 @@ body {
 }
 
 .body .content .cloSystem .clo-pour-history:hover {
-<<<<<<< HEAD
   background-color: #020238;
   color: white;
-=======
-  background-color: #06067c;
->>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
   cursor: pointer;
 }
 
@@ -237,8 +236,16 @@ body {
 
 .body .content #systemName {
   text-align: center;
-  font-size: 120%;
-  font-weight: 500;
+  font-size: 140%;
+  font-weight: 700;
+}
+
+.body .content #systemName::after {
+  content: "";
+  margin: 0 auto;
+  width: 200px;
+  display: block;
+  border-bottom: 2px solid #253c86;
 }
 
 .body .content #cloPourHistory {
@@ -253,22 +260,15 @@ body {
 }
 
 .body .content #cloPourHistory table .tableTitle th {
-<<<<<<< HEAD
   background-color: #253c86;
-=======
-  background-color: #06067c;
->>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
   padding: 5px;
   width: 250px;
 }
 
 .body .content #cloPourHistory table .tableContent th {
-<<<<<<< HEAD
-  background-color: #2e85c7;
-=======
-  background-color: #047d9b;
->>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
+  background-color: #2e85c791;
   padding: 5px;
+  color: black;
 }
 
 .body .content #cloPourHistory #add-history {
@@ -292,17 +292,61 @@ body {
 }
 
 footer {
-  background-color: #ccc;
-  height: 30px;
-  text-align: center;
-  line-height: 30px;
+  background-color: #dfdddd;
+  height: 250px;
 }
 
-<<<<<<< HEAD
+footer .name {
+  text-align: center;
+  padding-top: 20px;
+  font-size: 120%;
+}
+
+footer .coppyright {
+  text-align: center;
+}
+
+footer .follow {
+  margin-left: 10px;
+}
+
+footer .follow div {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+}
+
+footer .follow div i {
+  color: black;
+  font-size: 140%;
+  line-height: 50px;
+}
+
+footer .follow div:hover {
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.363);
+  border-radius: 50%;
+}
+
+footer .follow div:visited {
+  color: black;
+}
+
+footer .contact {
+  margin-left: 20px;
+}
+
+footer .contact div {
+  margin-bottom: 10px;
+}
+
+footer .contact div i {
+  font-size: 120%;
+  margin-right: 10px;
+}
+
 @media (max-width: 730px) {
-=======
-@media (max-width: 480px) {
->>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
   .header .logo {
     width: 80px;
     height: 80px;
@@ -311,7 +355,7 @@ footer {
   .header .title {
     font-size: 100%;
     margin-left: 20px;
-    line-height: 0;
+    line-height: 1;
     width: 90%;
   }
   .header .register {
@@ -325,20 +369,29 @@ footer {
     right: 50px;
   }
   .body .navigation {
-<<<<<<< HEAD
-    margin-left: -600px;
-=======
-    margin-left: -420px;
->>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
     width: 100%;
-    position: relative;
-    height: 800px;
+    background-color: rgba(0, 0, 0, 0.24);
+    min-height: 0;
+    height: calc(100% - 160px);
+    position: absolute;
+    top: 160px;
+    left: 0;
+    margin: 0;
+    border: none;
+    z-index: 999;
+    visibility: hidden;
+  }
+  .body .navigation ul {
+    padding-top: 5px;
+    width: 70%;
+    background-color: white;
+    height: 100%;
   }
   .body .navigation .open {
     visibility: visible;
     position: fixed;
     left: 0px;
-    top: 400px;
+    top: 350px;
     font-size: 200%;
     opacity: 0.6;
     z-index: 999;
@@ -347,9 +400,9 @@ footer {
     opacity: 1;
   }
   .body .navigation .close {
-    position: fixed;
-    top: 400px;
-    right: 10px;
+    position: absolute;
+    top: 200px;
+    right: 32%;
     font-size: 200%;
     opacity: 0.6;
   }
@@ -358,6 +411,38 @@ footer {
   }
   .body .content {
     width: 100%;
+    padding: 0;
+  }
+  .body .content #location {
+    text-align: center;
+    font-size: 130%;
+  }
+  .body .content #location i {
+    font-size: 150%;
+    padding: 5px;
+    color: #253c86;
+  }
+  .body .content .cloSystem {
+    display: block;
+    margin: 15px auto;
+  }
+  .body .content #cloPourHistory {
+    margin-left: 16px;
+    margin-top: 20px;
+  }
+  footer {
+    height: 340px;
+    margin-top: 30px;
+  }
+  footer .follow {
+    text-align: center;
+  }
+  footer .contact div {
+    margin-bottom: 5px;
+  }
+  footer .coppyright, footer .name {
+    width: 90%;
+    margin: 0 auto;
   }
 }
 /*# sourceMappingURL=app.css.map */

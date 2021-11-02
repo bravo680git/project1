@@ -1,68 +1,74 @@
-let loginAPI=''
+import {LoginForm} from './components.js'
+import {vi,en} from './lang.js'
+import {startOrStopLoadingAnimation} from './app.js'
+
+let loginAPI='https://sampleapiproject.azurewebsites.net/api/auth'
 let root =document.querySelector('#main')
 let Form
 
-export function logIn(callback) {
-    let username=Form.querySelector('#username').value
-    let password=Form.querySelector('#password').value
+function logIn(callback) {
+    let username=Form.querySelector('#username')  
+    let password=Form.querySelector('#password')
     let account= {
-        username:username,
-        password:password
+        username:username.value,
+        password:password.value
     }
     let options= {
-        method: "POST",
+        method: 'POST',  
+        cache: 'no-cache', 
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        redirect: 'follow',
+        referrerPolicy: 'no-referrer',
         body: JSON.stringify(account)
     }
 
+    startOrStopLoadingAnimation(true)
     fetch(loginAPI,options)
-        .then(response => response.json)
+        .then(response => response.json())
         .then(data => {
-            sessionStorage.setItem("loginToken", data[0])
-            sessionStorage.setItem("isLogin", "true")
-
-            root.removeChild(Form)
-            callback()
+            startOrStopLoadingAnimation(false)
+            if (data.detail) {
+                falseAccountError(data.detail)
+                password.value=""
+            }
+            else if (data.title) {
+                alert(data.title)
+            }
+            else {
+                sessionStorage.setItem("loginToken", data.token.authToken)
+                sessionStorage.setItem("isLogin", "true")
+                setTimeout(()=>{
+                    logOut()
+                    if (localStorage.getItem('language')=='vi') {
+                        alert(vi.messageToLogout)
+                    }
+                    else {
+                        alert(en.messageToLogout)
+                    }
+                    location.reload()
+                },3600000)
+                root.removeChild(Form)
+                callback()
+            }
         })
-        .catch(error => {
-            console.log(error);
-            falseAccountError()
-        })
+        .catch(error => console.log(error))
 }
 
-export function logOut() {
+function logOut() {
     sessionStorage.removeItem("loginToken")
     sessionStorage.setItem("isLogin","false")
 }
 
-export function loadLoginForm(lang) {
+function loadLoginForm(lang) {
     Form= document.createElement('div')
-    Form.innerHTML=loginForm(lang)
+    Form.innerHTML=LoginForm(lang)
     root.appendChild(Form)
 }
 
-function falseAccountError() {
-    let errorMessage='Username or password wrong!'
+function falseAccountError(errorMessage) {
     document.getElementById('error').innerText=errorMessage
 }
 
-// Create Login Form
-function loginForm(lang) {
-    return `
-    <div class="login-box">
-        <div class="login-form">
-            <form >
-                <img class="login-logo" src="../resources/images/logo_sistech.jpg" alt="Sistech logo">
-                <div class="login-logo-label">${lang.logIn}</div>
-                <div class="form-input">
-                    <i class="fas fa-user-alt input-icon"></i>
-                    <input id="username" class="username" type="text" placeholder='${lang.username}'>
-                    <i class="fas fa-unlock input-icon"></i>
-                    <input id="password" class="password" type="password" placeholder='${lang.password}'>
-                </div>
-                    <div class="false-warming" id="error"></div>
-                    <button class="submit-btn" type="button">${lang.logIn}</button>
-            </form>
-        </div>    
-    </div>
-            `
-}
+export {logIn,logOut,loadLoginForm}

@@ -1,6 +1,6 @@
 $fontSize: 20px;
 $firstColor: #253c86;
-$secondColor: #2e85c7;
+$secondColor: #2e85c791;
 $thirthColor:#ccc;
 $screenWidth: 100vw;
 
@@ -10,12 +10,11 @@ $screenWidth: 100vw;
     box-sizing: border-box;
 }
 
-body {
+html,body {
     font-size: $fontSize;
     width: $screenWidth;
     font-family: Arial, Helvetica, sans-serif;
     height: 100%;
-<<<<<<< HEAD
 }
 
 @keyframes loadingSpin {
@@ -48,8 +47,12 @@ body {
         left: 50%;
         animation: loadingSpin 1.5s infinite;
     }
-=======
->>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: block;
 }
 //-------------------------------------------------------------------------------------------------------------
 //---------------------Header------------------------------------------------------------------------------------
@@ -122,41 +125,40 @@ body {
 .body {
     min-height: 420px;
     background-size: cover;
-    height: fit-content;
+    min-height: calc(100% - 160px);
 
     //-------------------------------------------------------------------------------------------------------------
     //-----------------------------Navigation-------------------------------------------------------------------------
     .navigation {
         padding-top: 5px;
-        width: 25%;
+        width: 240px;
         float: left;
-<<<<<<< HEAD
         min-height: 500px;
-        background-color: $secondColor;
+        border: 5px solid;
+        border-style: groove;    margin: 5px 0 0 5px;
 
-=======
-        min-height: 420px;
-        background-color: $secondColor;
->>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
         ul {
             list-style: none;
+            
             li {
-                padding: 10px 40px;  
-                color: white;
+                padding: 15px 15px;  
+                color: black;
+                background-color: $secondColor;
                 font-weight: 600;
+                margin: 5px;
+                box-shadow: 2px 2px 4px;
+
                 &:hover {
                     cursor: pointer;
                     background-color: $firstColor;
+                    color: white;
                 }
             }
         }
     
         .selected {
-<<<<<<< HEAD
-            background-color: $firstColor
-=======
-            background-color: $thirthColor;
->>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
+            background-color: $firstColor;
+            color: white;
         }
     
         .open {
@@ -168,44 +170,43 @@ body {
     //--------------------------Content----------------------------------------------------------------------------
     .content {
         float: left;
-        width: 75%;
         margin-top: 20px;
         padding-left: 30px;
         position: relative;
         $marginLeft: 30px;
+
+        #location {
+            font-size: 130%;
+
+            i {
+                font-size: 150%;
+                padding: 5px;
+                color: $firstColor;
+            }
+
+        }
     
         .cloSystem {
-<<<<<<< HEAD
             background-color: $thirthColor;
-=======
-            background-color: rgba(53, 10, 153, 0.637);
->>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
             width: 290px;
             height: 312px;
             display: inline-block;
             border-radius: 20px;
             padding: 20px;
             margin: 5px;
+            box-shadow: 2px 2px 4px;
     
             .title {
                 text-align: center;
                 font-size: 120%;
                 font-weight: 600;
                 margin-top: -10px;
-<<<<<<< HEAD
                 color: black;
-=======
-                color: white;
->>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
             }
     
             .level, .pressure, .clo-concentration {
                 margin-bottom: 10px;
-<<<<<<< HEAD
                 color: black;
-=======
-                color: white;
->>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
     
                 & > div {
                     margin-left: -5px;
@@ -214,7 +215,6 @@ body {
             }
     
             .clo-pour-history {
-<<<<<<< HEAD
                 height: 36px;
                 line-height: 40px;
                 width: 200px;
@@ -227,23 +227,6 @@ body {
                 &:hover {
                     background-color: rgb(2, 2, 56);
                     color: white;
-=======
-                background-color: blueviolet;
-                width: 200px;
-                text-align: center;
-                border-radius: 10px;
-                height: 30px;
-                line-height: 20px;
-                color: white;
-                font-weight: 500;
-                font-size: 90%;
-                margin: 0 auto;
-                padding: 5px 0;
-                border: 1px solid black;
-    
-                &:hover {
-                    background-color: $thirthColor;
->>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
                     cursor: pointer;
                 }
             }
@@ -265,8 +248,16 @@ body {
     
         #systemName {
             text-align: center;
-            font-size: 120%;
-            font-weight: 500;
+            font-size: 140%;
+            font-weight: 700;
+
+            &::after {
+                content: "";
+                margin: 0 auto;
+                width: 200px;
+                display: block;
+                border-bottom: 2px solid $firstColor;
+            }
         }
     
         #cloPourHistory {
@@ -290,6 +281,7 @@ body {
                     th {
                         background-color: $secondColor;
                         padding: 5px;
+                        color: black;
                     }
                 }
             
@@ -321,10 +313,59 @@ body {
 //-------------------------------------------------------------------------------------------------------
 //--------------------Footer---------------------------------------------------------------
 footer {
-    background-color: #ccc;
-    height: 30px;
-    text-align: center;
-    line-height: 30px;
+    background-color: rgb(223, 221, 221);
+    height: 250px;
+
+    .name {
+        text-align: center;
+        padding-top: 20px;
+        font-size: 120%;
+    }
+
+    .coppyright {
+        text-align: center;
+    }
+
+    .follow {
+        margin-left: 10px;
+
+        div {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+    
+            i {
+                color: black;
+                font-size: 140%;
+                line-height: 50px;
+            }
+    
+            &:hover {
+                cursor: pointer;
+                background-color: rgba(0, 0, 0, 0.363);
+                border-radius: 50%;
+            }
+    
+            &:visited {
+                color: black;
+            }
+        }
+    }
+
+    .contact {
+        margin-left: 20px;
+        
+        div {
+            margin-bottom: 10px;
+
+            i {
+                font-size: 120%;
+                margin-right: 10px;
+            }
+        }
+    }
+
 }
 
 
@@ -333,6 +374,7 @@ footer {
 //---------------------------------------------------------------------------------------------
 @media (max-width:730px) {
     .header {
+        
         .logo {
             width: 80px;
             height: 80px;
@@ -342,7 +384,7 @@ footer {
         .title {
             font-size: 100%;
             margin-left: 20px;
-            line-height: 0;
+            line-height: 1;
             width: 90%;
         }
 
@@ -361,20 +403,30 @@ footer {
 
     .body {
         .navigation {
-<<<<<<< HEAD
-            margin-left: -600px;
-=======
-            margin-left: -420px;
->>>>>>> 3072e74e0943361e34c83e88eb4e3b3a646acb08
             width: 100%;
-            position: relative;
-            height: 800px;
-    
+            background-color: rgba(0, 0, 0, 0.24);
+            min-height: 0;
+            height: calc(100% - 160px);
+            position: absolute;
+            top: 160px;
+            left: 0;
+            margin: 0;
+            border: none;
+            z-index: 999;
+            visibility: hidden;
+            
+            ul {
+                padding-top: 5px;
+                width: 70%;
+                background-color: white;
+                height: 100%;
+            }
+
             .open {
                 visibility: visible;
                 position: fixed;
                 left: 0px;
-                top: 400px;
+                top: 350px;
                 font-size: 200%;
                 opacity: 0.6;
                 z-index: 999;
@@ -385,9 +437,9 @@ footer {
             }
     
             .close {
-                position: fixed;
-                top: 400px;
-                right: 10px;
+                position: absolute;
+                top: 200px;
+                right: 32%;
                 font-size: 200%;
                 opacity: 0.6;
     
@@ -399,6 +451,49 @@ footer {
     
         .content {
             width: 100%;
+            padding: 0;
+
+            #location {
+                text-align: center;
+                font-size: 130%;
+
+                i {
+                    font-size: 150%;
+                    padding: 5px;
+                    color: $firstColor;
+                }
+
+            }
+
+            .cloSystem {
+                display: block;
+                margin: 15px auto;
+            }
+
+            #cloPourHistory{
+                margin-left: 16px;
+                margin-top: 20px;
+            }
+        }
+    }
+
+    footer {
+        height: 340px;
+        margin-top: 30px;
+
+        .follow {
+            text-align: center;
+        }
+
+        .contact {
+            div {
+                margin-bottom: 5px;
+            }
+        }
+        
+        .coppyright, .name {
+            width: 90%;
+            margin: 0 auto;
         }
     }
 

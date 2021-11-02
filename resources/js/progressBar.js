@@ -1,3 +1,5 @@
+
+
 function progress(width, min,max,value,unit) {
     let barWidth=value/(max-min)*width
     let backColor, color
@@ -15,7 +17,6 @@ function progress(width, min,max,value,unit) {
         color="black"
     }
     
-
     return `
     <div style="
     position:relative;
@@ -27,9 +28,8 @@ function progress(width, min,max,value,unit) {
     <div style="
         height:30px;
         width:${width}px;
-        border:1px solid black;
-        border-radius:10px;
-        box-shadow:0px 3px 2px black;
+        border-radius: 10px;
+        box-shadow:2px 2px 4px black;
     ">
     <div style="
         position:absolute;
@@ -50,22 +50,10 @@ function progress(width, min,max,value,unit) {
     `
 }
 
-{/* <div style="
-        position:absolute;
-        top: 10px;
-        left: 0;
-        font-size:16px;
-    ">${min}</div>
-    <div style="
-        position:absolute;
-        top: 10px;
-        right: 0;
-        font-size:16px;
-    ">${max}</div>
-    </div> */}
-
-export function makeProgressBar(width, min,max,value,parent,unit) {
+function makeProgressBar(width, min,max,value,parent,unit) {
     let par=document.querySelector(parent)
     let bar=progress(width, min,max,value,unit)
     par.innerHTML=bar
 }
+
+export {makeProgressBar}
