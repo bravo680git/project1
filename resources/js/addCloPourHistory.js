@@ -1,5 +1,5 @@
 
-export {loadAddForm,removeForm}
+
 
 function loadAddForm(lang,processId) {
     let root=document.getElementById('main')
@@ -87,3 +87,5 @@ function addForm(lang) {
     </div>
     `
 }
+
+export {loadAddForm,removeForm}

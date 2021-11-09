@@ -1,14 +1,15 @@
-
+import {progressBarLevel} from './constants.js'
 
 function progress(width, min,max,value,unit) {
     let barWidth=value/(max-min)*width
     let backColor, color
+    let {firstLevel,secondLevel}=progressBarLevel
 
-    if (value/(max-min)<0.4) {
+    if (value/(max-min)<firstLevel) {
         backColor="red"
         color="white"
     }
-    else if (value/(max-min)<0.7) {
+    else if (value/(max-min)<secondLevel) {
         backColor="green"
         color="white"
     }
@@ -29,19 +30,18 @@ function progress(width, min,max,value,unit) {
         height:30px;
         width:${width}px;
         border-radius: 10px;
-        box-shadow:2px 2px 4px black;
+        box-shadow:1px 1px 4px black;
     ">
     <div style="
         position:absolute;
         line-height:30px;
-        height:29px;
+        height:30px;
         background-color:${backColor};
         width:${barWidth}px;
         border-radius: 10px;
         text-align:center;
         color: ${color};
         font-size: 20px;
-        box-shadow:3px 0px 2px black;
     ">
     ${value}${unit}</div>
     </div>

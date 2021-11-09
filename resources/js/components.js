@@ -10,16 +10,19 @@ function Header(lang) {
          <div class="title">
              ${lang.mainTitle}
          </div>
-         <div class="lang-convert">
-             <button id="vi">vietnamese</button>
-             <button id="en">english</button>
-         </div>
-         <div class="register" id="logOut-btn">
-             <div class="icon">
-             <i class="fas fa-sign-out-alt"></i>
-             </div>
-             ${lang.logOut}
-         </div>    
+        <div class="header-btn">
+            <div class="register" id="logOut-btn">
+                <div class="icon">
+                    <i class="fas fa-sign-out-alt"></i>
+                </div>
+                ${lang.logOut}
+            </div>  
+            <div class="lang-convert">
+                <button id="vi">vietnamese</button>
+                <button id="en">english</button>
+            </div>
+      
+        </div>    
     </div>
     `
 }
@@ -29,15 +32,15 @@ function Footer() {
     <footer>
         <div class="name">Trung tâm nghiên cứu và đào tạo tự động hóa Sistrain</div>
         <div class="follow">
-        <div>
+        <div title="website">
             <a href="http://www.sistrain.com" target="blank" >
             <i class="fas fa-globe"></i></a>
         </div>    
-        <div>
+        <div title="youtube">
             <a href="https://www.youtube.com/channel/UCZlv_mk1VFnno-I3ciZO-ng"target="blank" >
             <i class="fab fa-youtube-square"></i></a>
         </div>
-        <div>
+        <div title="facebook">
             <a href="https://www.facebook.com/SistrainCenter"target="blank" >
             <i class="fab fa-facebook-square"></i></a>
         </div>

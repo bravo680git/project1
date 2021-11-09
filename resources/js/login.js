@@ -1,6 +1,5 @@
 import {LoginForm} from './components.js'
-import {vi,en} from './lang.js'
-import {startOrStopLoadingAnimation} from './app.js'
+import {startOrStopLoadingAnimation} from './appHandleFunction.js'
 
 let loginAPI='https://sampleapiproject.azurewebsites.net/api/auth'
 let root =document.querySelector('#main')
@@ -30,7 +29,7 @@ function logIn(callback) {
         .then(data => {
             startOrStopLoadingAnimation(false)
             if (data.detail) {
-                falseAccountError(data.detail)
+                document.getElementById('error').innerText=data.detail
                 password.value=""
             }
             else if (data.title) {
@@ -39,16 +38,6 @@ function logIn(callback) {
             else {
                 sessionStorage.setItem("loginToken", data.token.authToken)
                 sessionStorage.setItem("isLogin", "true")
-                setTimeout(()=>{
-                    logOut()
-                    if (localStorage.getItem('language')=='vi') {
-                        alert(vi.messageToLogout)
-                    }
-                    else {
-                        alert(en.messageToLogout)
-                    }
-                    location.reload()
-                },3600000)
                 root.removeChild(Form)
                 callback()
             }
@@ -65,10 +54,6 @@ function loadLoginForm(lang) {
     Form= document.createElement('div')
     Form.innerHTML=LoginForm(lang)
     root.appendChild(Form)
-}
-
-function falseAccountError(errorMessage) {
-    document.getElementById('error').innerText=errorMessage
 }
 
 export {logIn,logOut,loadLoginForm}
