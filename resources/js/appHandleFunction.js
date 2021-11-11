@@ -6,6 +6,7 @@ function handleCallApiError(response) {
         case 300:
             break
         case 401:
+            logOut()
             throw new Error(language.messageToLogout)
         default:
             throw new Error(response.statusText)
@@ -27,7 +28,7 @@ function handleLogOut(lang) {
                 </div>
                 ${lang.logIn}
         `
-    document.querySelector('.header').appendChild(newRegisterBtn)
+    document.querySelector('.header-btn').appendChild(newRegisterBtn)
 }
 
 function changeLanguage() {

@@ -1,6 +1,5 @@
-import {loadLoginForm,logIn} from './login.js'
+import {loadLoginForm} from './login.js'
 import {loadingApp,renderData} from './app.js'
-import {vi,en} from './lang.js'
 
  
 (function mainOperate() {
@@ -14,19 +13,16 @@ import {vi,en} from './lang.js'
     .then(renderData)
 }) ()
 
-//Define function
-function start(lang = en) {
+
+function start() {
     let isLogin = sessionStorage.getItem('isLogin')
 
     return new Promise(resolve => {
         if (isLogin == "true") {
             resolve()
         }
-        else {
-            loadLoginForm(lang)
-            document.querySelector('.submit-btn').onclick =()=>{
-                logIn(resolve)
-            }
+        else { 
+            loadLoginForm(resolve)
         }
     })
 }

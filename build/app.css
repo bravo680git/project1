@@ -116,6 +116,7 @@ html, body {
   min-height: 420px;
   background-size: cover;
   min-height: calc(100% - 160px);
+  display: flex;
 }
 
 .body .navigation {
@@ -160,7 +161,6 @@ html, body {
   margin-top: 20px;
   padding-left: 30px;
   position: relative;
-  z-index: -1;
 }
 
 .body .content #location {
@@ -174,7 +174,7 @@ html, body {
 }
 
 .body .content .cloSystem {
-  background-color: #cad9e7;
+  background-color: #a1ccf3;
   width: 290px;
   height: 312px;
   display: inline-block;
@@ -359,6 +359,10 @@ footer .coppyright {
 }
 
 @media (max-width: 780px) {
+  .header {
+    display: block;
+    position: relative;
+  }
   .header .logo {
     width: 80px;
     height: 80px;
@@ -378,6 +382,7 @@ footer .coppyright {
     margin: 0;
   }
   .header .lang-convert {
+    position: absolute;
     top: 76px;
     right: 50px;
   }
@@ -469,6 +474,12 @@ footer .coppyright {
 }
 
 @media (min-width: 750px) {
+  .header {
+    display: flex;
+  }
+  .header .title {
+    font-size: 120%;
+  }
   .body .content .cloSystem {
     display: inline-block;
     margin-left: 30px;

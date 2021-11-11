@@ -20,7 +20,12 @@ const vi={
     addFormTitle:"Thêm lịch sử châm Clo",
     getDate:"Get",
     cloAmount:"Lượng Clo",
-    save:"Lưu lại"
+    save:"Lưu lại",
+    yourData:"Dữ liệu đã nhập:",
+    saveConfirm:"Thêm lịch sử châm Clo?",
+    emptyValue:"Vui lòng nhập tên nhân viên!",
+    falseAmount:"Lượng Clo nằm trong khoảng 50-1000!",
+    created:"Dữ liệu đã được thêm!"
 }
 
 const en={
@@ -42,5 +47,10 @@ const en={
     addFormTitle:"Chlorine injection",
     getDate:"Get",
     cloAmount:"Amount",
-    save:"Save"
+    save:"Save",
+    yourData:"Your data:",
+    saveConfirm:"Add Chlorine injection history?",
+    emptyValue:"Staff name is empty!",
+    falseAmount:"Amount is between 50 and 1000!",
+    created:"Injection Created!"
 }

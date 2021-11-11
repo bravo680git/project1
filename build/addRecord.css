@@ -35,10 +35,11 @@ body {
 .add-history-form form .title {
   text-align: center;
   margin-top: 20px;
+  font-size: 150%;
 }
 
 .add-history-form form .date, .add-history-form form .staff, .add-history-form form .amount {
-  margin: 15px 10px;
+  margin: 24px 10px;
   display: flex;
   margin-right: 40px;
 }
@@ -110,7 +111,7 @@ body {
 
 @media (max-width: 480px) {
   .add-history-form form {
-    height: 350px;
+    height: 300px;
   }
   .add-history-form form .date, .add-history-form form .staff, .add-history-form form .amount {
     flex-direction: column;

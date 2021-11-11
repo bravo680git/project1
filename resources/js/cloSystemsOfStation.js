@@ -3,6 +3,7 @@ import { renderValuesOfStationLoop,renderValuesOfStation} from './app.js'
 import {makeProgressBar} from './progressBar.js'
 import {startOrStopLoadingAnimation,renderValue} from './appHandleFunction.js'
 import {language} from './constants.js'
+import {loadAddForm} from './addCloPourHistory.js'
 
 function renderCloSystems(data,stationId,loop) {
     let content=document.getElementById("subContent")
@@ -38,9 +39,9 @@ function renderHistoryTable(data,systemName,stationId) {
     systemValuePage.innerHTML=SystemValue(language)
     contentBox.appendChild(systemValuePage)
 
-    // document.getElementById('add-history').onclick=()=>{
-    //     loadAddForm(language,data[0].processingSystemID)
-    // }
+    document.getElementById('add-history').onclick=()=>{
+        loadAddForm(data[0].processingSystemId)
+    }
 
     document.getElementById('return').onclick=()=>{
         startOrStopLoadingAnimation(true)
@@ -65,9 +66,10 @@ function renderHistoryTable(data,systemName,stationId) {
 function createRowOfTable(data) {
     let row = document.createElement('tr')
     row.classList.add('tableContent')
-    let time=new Date(data.injectionTime).toUTCString()
+    let time=data.injectionTime
+    let tableTime=time.slice(11,22) +' '+time.slice(8,10)+'/'+time.slice(5,7)+'/'+time.slice(0,4)
     row.innerHTML = `
-        <th>${time.slice(4,25)}</th>
+        <th>${tableTime}</th>
         <th>${data.employeeName}</th>
         <th>${data.amountOfChlorine}</th>
         `
@@ -91,4 +93,4 @@ function valuesOfStation(data, stationId,loop) {
 }
 
 
-export {renderCloSystems,valuesOfStation}
+export {renderCloSystems,valuesOfStation,createRowOfTable}

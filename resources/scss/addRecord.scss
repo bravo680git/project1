@@ -39,12 +39,14 @@ body {
         .title {
             text-align: center;
             margin-top: 20px;
+            font-size: 150%;
         }
 
         .date, .staff, .amount {
-            margin: 15px 10px;
+            margin: 24px 10px;
             display: flex;
             margin-right: 40px;
+
             input {
                 flex: 1;
                 height: 30px;
@@ -116,7 +118,7 @@ body {
 @media (max-width: 480px) {
     .add-history-form {
         form {
-            height: 350px;
+            height: 300px;
 
             .date,.staff,.amount {
                 flex-direction: column;

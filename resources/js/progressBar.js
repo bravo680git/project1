@@ -30,6 +30,7 @@ function progress(width, min,max,value,unit) {
         height:30px;
         width:${width}px;
         border-radius: 10px;
+        background-color:#00000024;
         box-shadow:1px 1px 4px black;
     ">
     <div style="

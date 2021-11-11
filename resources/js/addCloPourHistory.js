@@ -1,32 +1,5 @@
-
-
-
-function loadAddForm(lang,processId) {
-    let root=document.getElementById('main')
-    let myForm=document.createElement('div')
-    myForm.id="Form-added"
-    myForm.innerHTML=addForm(lang)
-    root.appendChild(myForm)
-
-    getTime()
-
-    document.getElementById('save').onclick=()=>{
-        let time=document.getElementById('date').value 
-        let staff=document.getElementById('staff').value
-        let amount=document.getElementById('amount').value
-        let data={
-            employeeName:staff,
-            injectionTime:time,
-            chlorineVolume:amount,
-            chlorineInjectionID:processId
-        }
-
-        saveHistory(data)
-    }
-
-    let closeBtn=document.getElementById('close-form-btn')
-    closeBtn.onclick=removeForm
-}
+import { language,apiServer} from "./constants.js"
+import {createRowOfTable} from './cloSystemsOfStation.js'
 
 function saveHistory(data) {
     let option = {
@@ -34,17 +7,73 @@ function saveHistory(data) {
         headers: {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Headers': '*',
-            'accept': '*/*'
+            'Authorization':`Bearer ${sessionStorage.getItem('loginToken')}`
         },
-        
         body: JSON.stringify(data)
     }
 
-    fetch('https://water-test-training.herokuapp.com/chlorineinjections',option)
-    .then(()=>{
-        alert("Successful!")
+    fetch(`${apiServer}/chlorineinjections`,option)
+    .then((response)=>{
+        if (response.status==200 || response.status==300) {
+            alert(language.created)
+            removeForm()
+            let newRow=createRowOfTable(data)
+            let table = document.querySelector('table')
+            table.insertBefore(newRow,table.firstChild)
+        }
+        else {
+            throw new Error(response.statusText)
+        }
     })
     .catch(error=>alert(error))
+}
+
+function loadAddForm(processId) {
+    let root=document.getElementById('main')
+    let myForm=document.createElement('div')
+    myForm.id="Form-added"
+    myForm.innerHTML=Form(language)
+    root.appendChild(myForm)
+
+    document.getElementById('save').onclick=()=>{
+        handleSaveData(processId)
+    }
+
+    document.getElementById('close-form-btn').onclick=removeForm
+   
+}
+
+function handleSaveData(processId) {
+    let time=getTime()
+    let staff=document.getElementById('staff').value.toPascalCase()
+    let amount=document.getElementById('amount').value
+   
+    if (amount<50||amount>1000) {
+        alert(language.falseAmount)
+    }
+    else  if (staff=='' || staff==' '){
+        alert(language.emptyValue)
+    }
+    else {
+        let data={
+            employeeName:staff,
+            injectionTime:time,
+            amountOfChlorine :amount,
+            processingSystemId:processId,
+        }
+
+        let saveConfirm=confirm(`
+        ${language.yourData}
+            ${language.time}: ${time}
+            ${language.tableEmp}: ${staff}
+            ${language.cloAmount}: ${amount}
+        ${language.saveConfirm}
+        `)
+
+        if (saveConfirm) {
+            saveHistory(data)
+        }
+    }
 }
 
 function removeForm() {
@@ -54,38 +83,47 @@ function removeForm() {
 }
 
 function getTime() {
-    let time=document.getElementById('date')
-    document.getElementById('getTimeBtn').onclick=()=>{
-        let date=new Date()
-        let isoDate=date.toISOString()
-        time.value=isoDate.slice(0,19)
-    }
-
+    let date = new Date()
+    let isoDate = date.toISOString()
+    return isoDate.slice(0, 19)
 }
 
-function addForm(lang) {
+function Form(language) {
+
     return `
     <div class="add-history-form">
         <form action="">
-            <div class="title">${lang.addFormTitle}</div>
-            <div class="date">
-                <label for="date">${lang.tableTime}</label>
-                <input name="date" id="date" type="text">
-                <button type="button" id="getTimeBtn">${lang.getDate}</button>
-            </div>
+            <div class="title">${language.addFormTitle}</div>
             <div class="staff">
-                <label for="staff">${lang.tableEmp}</label>
+                <label for="staff">${language.tableEmp}</label>
                 <input name="staff" id="staff" type="text">
             </div>
             <div class="amount">
-                <label for="amount">${lang.cloAmount}</label>
+                <label for="amount">${language.cloAmount}</label>
                 <input name="amount" id="amount" type="text">
             </div>
             <button type="button" id="close-form-btn">&times;</button>
-            <button type="button" id="save">${lang.save}</button>
+            <button type="button" id="save">${language.save}</button>
         </form>
     </div>
     `
+}
+
+String.prototype.toPascalCase = function() {
+    return this
+      .replace(
+        new RegExp(/\s+(.)(\w*)/, 'g'),
+        ($1, $2, $3) => ` ${$2.toUpperCase() + $3.toLowerCase()+' '}`
+      )
+      .replace(new RegExp(/\w/), s => s.toUpperCase())
+      .replace(/\s+/g, ' ')
+  }
+
+{//  <div class="date">
+//                 <label for="date">${language.tableTime}</label>
+//                 <input name="date" id="date" type="text">
+//                 <button type="button" id="getTimeBtn">${language.getDate}</button>
+//             </div> 
 }
 
 export {loadAddForm,removeForm}

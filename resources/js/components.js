@@ -74,11 +74,9 @@ function SystemValue(lang) {
                 </tr>
             </thead>
         </table>
-    <!--
     <div id="add-history">
         <button title="Thêm nhật ký châm Clo"><i class="fas fa-plus"></i></button>
     </div>
-    -->
     `
 }
 

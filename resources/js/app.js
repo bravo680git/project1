@@ -1,6 +1,6 @@
 import { logOut } from "./login.js"
 import {App} from './components.js'
-import {handleCallApiError,handleLogOut,changeLanguage,openClodeNav,startOrStopLoadingAnimation,renderValue} from './appHandleFunction.js'
+import {handleCallApiError,handleLogOut,changeLanguage,openClodeNav,startOrStopLoadingAnimation} from './appHandleFunction.js'
 import {valuesOfStation} from './cloSystemsOfStation.js'
 import {renderList,handleChangSelectedStation} from './stationList.js'
 import {cycleTime,language,apiServer} from './constants.js'
@@ -25,10 +25,8 @@ function loadingApp() {
         handleLogOut(language)
         document.getElementById('logIn-btn').onclick=()=>{
             location.reload()
-        }
-        
+        } 
     }
-
 } 
 
 
@@ -43,6 +41,7 @@ function renderData() {
             'Authorization':`Bearer ${sessionStorage.getItem('loginToken')}`
         }
     }
+    
     fetch(`${apiServer}/stations/list`,fetchOption)
         .then(response=>{
             handleCallApiError(response)
@@ -57,8 +56,7 @@ function renderData() {
         }) 
         .catch((error)=>{
             alert(error)
-            //logOut()
-            //location.reload()
+            location.reload()
         })       
 }
 
@@ -83,8 +81,7 @@ function renderValuesOfStation(stationId) {
         })
         .catch((error)=>{
             alert(error)
-            //logOut()
-            //location.reload()
+            location.reload()
         }) 
 }
 
