@@ -30,7 +30,7 @@ function Header(lang) {
 function Footer() {
     return `
     <footer>
-        <div class="name">Trung tâm nghiên cứu và đào tạo tự động hóa Sistrain</div>
+        <div class="name">Trung tâm nghiên cứu và đào tạo tự động hóa SISTRAIN</div>
         <div class="follow">
         <div title="website">
             <a href="http://www.sistrain.com" target="blank" >
