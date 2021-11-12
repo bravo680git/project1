@@ -84,8 +84,16 @@ function removeForm() {
 
 function getTime() {
     let date = new Date()
-    let isoDate = date.toISOString()
-    return isoDate.slice(0, 19)
+    let hour=Number(date.toISOString().slice(11,13))+7
+    if (hour<10) {
+        hour='0'+hour.toString()
+    }
+    else {
+        hour=hour.toString()
+    }
+    let localDate=date.toISOString().slice(0,11)+hour+date.toISOString().slice(13,19)
+
+    return localDate
 }
 
 function Form(language) {
