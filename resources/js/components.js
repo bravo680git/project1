@@ -1,5 +1,4 @@
 
-
 function Header(lang) {
 
     return `
@@ -120,7 +119,7 @@ function LoginForm(lang) {
     <div class="login-box">
         <div class="login-form">
             <form >
-                <img class="login-logo" src="../resources/images/logo_sistech.jpg" alt="Sistech logo">
+                <img class="login-logo" src="./resources/images/logo_sistech.jpg" alt="Sistech logo">
                 <div class="login-logo-label">${lang.mainTitle}</div>
                 <div class="form-input">
                     <i class="fas fa-user-alt input-icon"></i>
