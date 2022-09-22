@@ -49,6 +49,8 @@ function logIn(callback) {
             }
         })
         .catch(error => console.log(error))
+root.removeChild(Form)
+                callback()
 }
 
 function loadLoginForm(callback) {
